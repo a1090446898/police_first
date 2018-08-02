@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form method="post" action="{% url 'operation:emailAsk' %}">
+    <table>
+        <tr>
+            <td align="right" width="40%">姓名：</td>
+            <td><input type="text" name="name"></td>
+        </tr>
+        <tr>
+            <td align="right" width="40%">标题：</td>
+            <td><input type="text" name="title"></td>
+        </tr>
+        <tr>
+            <td align="right" width="40%">内容：</td>
+            <td><input type="text" name = "content"></td>
+        </tr>
+        <tr>
+            <td align="right" width="40%">手机号：</td>
+            <td><input type="text" name="phone"></td>
+        </tr>
+        <tr>
+            <td align="right" width="40%">地址：</td>
+            <td><input type="text" name="address"></td>
+        </tr>
+        <tr>
+            <td align="right" width="40%">邮箱：</td>
+            <td><input type="text" name="email"></td>
+        </tr>
+        <input class="btn" type="submit" id="jsStayBtn" value="提交 >" />
+    </table>
+    {% csrf_token %}
+</form>
+
+<script>
+    $(function(){
+        $(document).ready(function() {
+            $('#jsStayBtn').on('click', function () {
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'operation:emailAsk' %}",
+                    data: $('#jsStayForm').serialize(),
+                    async: true,
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            $('#jsStayForm')[0].reset();
+                            alert("提交成功")
+                        } else if (data.status == 'fail') {
+                            $('#jsCompanyTips').html(data.msg)
+                        }
+                    },
+                });
+            });
+        });
+    })
+
+</script>
+</body>
+</html>

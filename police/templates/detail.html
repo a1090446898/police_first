@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+
+
+<head>
+     <div class="article" id="c">
+        <div class="Article_bt">
+            <h1>{{ new_detail.title }}</h1></div>
+        <div class="Article_ly">
+			<span>文章来源：{{ new_detail.source }} </span>
+            <span>发布时间：{{ new_detail.add_time|date:"Y-m-d" }} </span>
+            <span>阅读量：{{ new_detail.read_volume}} </span>
+        </div>
+    </div>
+</head>
+
+<body>
+    <div class="zw-con">
+      {% autoescape off%}
+          {{ new_detail.content }}
+      {% endautoescape %}
+    </div>
+{#<p>跳转成功</p>#}
+
+</body>
+
+</html>

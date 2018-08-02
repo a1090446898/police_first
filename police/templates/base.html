@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    
+</head>
+<body>
+    {% block title %}
+        <div>
+            <h2>测试</h2>
+        </div>
+
+    {% endblock %}
+    {% block content %}
+        <div>
+            <p>内容</p>
+        </div>
+
+    {% endblock %}
+
+</body>
+</html>
