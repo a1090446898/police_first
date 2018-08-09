@@ -22,7 +22,7 @@ class LogoImage(models.Model):
 class MovieWindow(models.Model):
     title = models.CharField(max_length=30, verbose_name='标题', default='')
     image = models.ImageField(upload_to='window/%Y/%m', verbose_name='Logo', max_length=100, blank=True, null=True)
-    is_window = models.BooleanField(default=True, verbose_name='是否开启飘窗')
+    # is_window = models.BooleanField(default=True, verbose_name='是否开启飘窗')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:

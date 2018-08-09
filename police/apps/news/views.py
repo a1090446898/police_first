@@ -8,6 +8,9 @@ from apps.work.models import *
 from resources.models import Resources
 from custom.models import LogoImage, MovieWindow, OtherConnections
 from duty.models import Duty, DutyMan
+from operation.models import Submission
+
+from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -105,7 +108,7 @@ class IndexView(View):
         # if other_urls:
         #     other_urls = []
 
-        return render(request, 'index_base.html', {
+        return render(request, 'index.html', {
             'all_News_banner': news_banner,
             'all_News': news,
             'new_title_id': title_new.id,
@@ -135,17 +138,275 @@ class IndexView(View):
 
 # 新闻列表页
 class NewsList(View):
-    def get(self):
-        pass
+    def get(self, request):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            lists = News.objects.all().order_by('-add_time')
+        else:
+            lists = Submission.objects.all().order_by('-add_time')
+
+        # 进行分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(lists, 1, request=request)
+
+        lists = p.page(page)
+
+        return render(request, 'news_list.html', {
+            'name': '监管要闻',
+            'lists': lists,
+            'option': option,
+
+        })
+
+
+# 支队动态列表页
+class TeamNewsList(View):
+    def get(self, request):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            lists = TeamNews.objects.all().order_by('-add_time')
+        else:
+            lists = Submission.objects.all().order_by('-add_time')
+
+        # 进行分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(lists, 1, request=request)
+
+        lists = p.page(page)
+
+        return render(request, 'team_system_list.html', {
+            'name': '支队动态',
+            'lists': lists,
+            'option': option,
+
+        })
+
+
+# 各地动态列表
+class PlacesNewsList(View):
+    def get(self, request):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            lists = PlacesNews.objects.all().order_by('-add_time')
+        else:
+            lists = Submission.objects.all().order_by('-add_time')
+
+        # 进行分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(lists, 1, request=request)
+
+        lists = p.page(page)
+
+        return render(request, 'places_news_list.html', {
+            'name': '各地动态',
+            'lists': lists,
+            'option': option,
+
+        })
+
+
+# 协助破案
+class HelpNewsList(View):
+    def get(self, request):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            lists = HelpNews.objects.all().order_by('-add_time')
+        else:
+            lists = Submission.objects.all().order_by('-add_time')
+
+        # 进行分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(lists, 1, request=request)
+
+        lists = p.page(page)
+
+        return render(request, 'help_news_list.html', {
+            'name': '协助破案',
+            'lists': lists,
+            'option': option,
+
+        })
+
+
+# 视频巡查
+class VideoPatrolList(View):
+    def get(self, request):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            lists = VideoPatrol.objects.all().order_by('-add_time')
+        else:
+            lists = Submission.objects.all().order_by('-add_time')
+
+        # 进行分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(lists, 1, request=request)
+
+        lists = p.page(page)
+
+        return render(request, 'video_patrol_list.html', {
+            'name': '视频巡查',
+            'lists': lists,
+            'option': option,
+
+        })
+
+
+# 党建工作
+class BuildWorkList(View):
+    def get(self, request):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            lists = BuildWork.objects.all().order_by('-add_time')
+        else:
+            lists = Submission.objects.all().order_by('-add_time')
+
+        # 进行分页
+        try:
+            page = request.GET.get('page', 1)
+        except PageNotAnInteger:
+            page = 1
+
+        p = Paginator(lists, 1, request=request)
+
+        lists = p.page(page)
+
+        return render(request, 'build_work_list.html', {
+            'name': '党建工作',
+            'lists': lists,
+            'option': option,
+
+        })
 
 
 # 新闻详情页
-class NewsDetail(View):
-    def get(self, request, new_id):
-        new_detail = News.objects.get(id=int(new_id))
-        new_detail.read_volume += 1
-        new_detail.save()
+class NewsDetails(View):
+    def get(self, request, detail_id):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            new_detail = News.objects.get(id=int(detail_id))
+        else:
+            new_detail = Submission.objects.get(id=int(detail_id))
+
         return render(request, 'detail.html', {
-            'new_detail': new_detail,
+            'new_detail': new_detail
+
+        })
+
+
+# 支队动态详情页
+class TeamNewsDetails(View):
+    def get(self, request, detail_id):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            new_detail = TeamNews.objects.get(id=int(detail_id))
+        else:
+            new_detail = Submission.objects.get(id=int(detail_id))
+
+        return render(request, 'detail.html', {
+            'new_detail': new_detail
+
+        })
+
+
+# 各地动态详情页
+class PlacesNewsDetails(View):
+    def get(self, request, detail_id):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            new_detail = PlacesNews.objects.get(id=int(detail_id))
+        else:
+            new_detail = Submission.objects.get(id=int(detail_id))
+
+        return render(request, 'detail.html', {
+            'new_detail': new_detail
+
+        })
+
+
+# 协助破案详情页
+class HelpNewsDetails(View):
+    def get(self, request, detail_id):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            new_detail = HelpNews.objects.get(id=int(detail_id))
+        else:
+            new_detail = Submission.objects.get(id=int(detail_id))
+
+        return render(request, 'detail.html', {
+            'new_detail': new_detail
+
+        })
+
+
+# 视频巡查详情页
+class VideoPatroDetails(View):
+    def get(self, request, detail_id):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            new_detail = VideoPatrol.objects.get(id=int(detail_id))
+        else:
+            new_detail = Submission.objects.get(id=int(detail_id))
+
+        return render(request, 'detail.html', {
+            'new_detail': new_detail
+
+        })
+
+
+# 党建工作详情页
+class BuildWorkDetails(View):
+    def get(self, request, detail_id):
+        # 进行选项
+        option = request.GET.get('option', '')
+
+        if option == '1' or option == '':
+            new_detail = BuildWork.objects.get(id=int(detail_id))
+        else:
+            new_detail = Submission.objects.get(id=int(detail_id))
+
+        return render(request, 'detail.html', {
+            'new_detail': new_detail
 
         })

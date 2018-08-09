@@ -24,12 +24,18 @@ import xadmin
 
 
 from news.views import IndexView
+from custom.views import IntroduceView
 
 urlpatterns = [
     url(r'^xadmin/', xadmin.site.urls),
     url(r'^ueditor/', include('DjangoUeditor.urls')),
-    url(r'^$', IndexView.as_view(), name='Index'),
     url(r'^news/', include('news.urls', namespace='news')),
+    url(r'^work/', include('work.urls', namespace='work')),
+    url(r'^resources/', include('resources.urls', namespace='resources')),
+    url(r'^communication/', include('communication.urls', namespace='communication')),
+
+    url(r'^$', IndexView.as_view(), name='Index'),
+    url(r'^introduce/$', IntroduceView.as_view(), name='introduce'),
 
     url(r'^operation/', include('operation.urls', namespace='operation')),
     #配置上传文件访问处理

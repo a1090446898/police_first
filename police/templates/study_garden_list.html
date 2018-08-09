@@ -1,0 +1,9 @@
+{% extends 'list.html' %}
+{% load staticfiles %}
+
+{% block urls %}
+     <a href="{% url 'communication:study_garden_detail' list.id %}?option={{ option }}">
+         {{ list.title }}
+     </a>
+{% endblock %}
+{% block option %}{% endblock %}

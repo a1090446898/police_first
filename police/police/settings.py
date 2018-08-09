@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'resources',
     'duty',
     'custom',
+    'pure_pagination',
 ]
 
 MIDDLEWARE_CLASSES = [

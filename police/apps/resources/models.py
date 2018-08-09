@@ -6,7 +6,7 @@ from django.db import models
 
 
 class Resources(models.Model):
-    name = models.CharField(max_length=100, verbose_name='业务名')
+    title = models.CharField(max_length=100, verbose_name='业务名')
     download = models.FileField(upload_to='resource/%Y/%m', verbose_name='资源文件', max_length=100)
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
