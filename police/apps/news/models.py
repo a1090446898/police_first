@@ -29,7 +29,6 @@ class News(models.Model):
                            filePath='news/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=True, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
@@ -53,7 +52,6 @@ class TeamNews(models.Model):
                            filePath='teamNews/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=True, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
@@ -70,7 +68,6 @@ class PlacesNews(models.Model):
                            filePath='placesNews/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=True, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
@@ -87,7 +84,6 @@ class HelpNews(models.Model):
                            filePath='helpNews/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=True, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
@@ -104,7 +100,6 @@ class VideoPatrol(models.Model):
                            filePath='videoPatrol/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=True, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
@@ -121,7 +116,6 @@ class BuildWork(models.Model):
                            filePath='buildWork/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=True, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:

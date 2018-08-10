@@ -10,7 +10,6 @@ class NewsAdmin(object):
     search_fields = ['title', 'source', 'is_banner', 'read_volume']
     list_filter = ['title', 'source', 'read_volume', 'is_banner', 'add_time']
     readonly_fields = ['read_volume']
-    exclude = ['is_imgText']
 
     def queryset(self):
         qs = super(NewsAdmin, self).queryset()
@@ -24,7 +23,6 @@ class BannerNewsAdmin(object):
     search_fields = ['title', 'source', 'is_banner', 'read_volume']
     list_filter = ['title', 'source', 'read_volume', 'is_banner', 'add_time']
     readonly_fields = ['read_volume']
-    exclude = ['is_imgText']
 
     def queryset(self):
         qs = super(BannerNewsAdmin, self).queryset()
@@ -38,7 +36,6 @@ class HelpNewsAdmin(object):
     search_fields = ['title', 'source', 'read_volume']
     list_filter = ['title', 'source', 'read_volume', 'add_time']
     readonly_fields = ['read_volume']
-    exclude = ['is_imgText']
 
 
 class PlacesNewsAdmin(object):
@@ -47,7 +44,6 @@ class PlacesNewsAdmin(object):
     search_fields = ['title', 'source', 'read_volume']
     list_filter = ['title', 'source', 'read_volume', 'add_time']
     readonly_fields = ['read_volume']
-    exclude = ['is_imgText']
 
 
 class TeamNewsAdmin(object):
@@ -65,7 +61,6 @@ class BuildWorkAdmin(object):
     search_fields = ['title', 'source', 'read_volume']
     list_filter = ['title', 'source', 'read_volume', 'add_time']
     readonly_fields = ['read_volume']
-    exclude = ['is_imgText']
 
 
 class VideoPatrolAdmin(object):
@@ -74,7 +69,6 @@ class VideoPatrolAdmin(object):
     search_fields = ['title', 'source', 'read_volume']
     list_filter = ['title', 'source', 'read_volume', 'add_time']
     readonly_fields = ['read_volume']
-    exclude = ['is_imgText']
 
 
 # class BannerAdmin(object):

@@ -7,7 +7,7 @@ from .models import *
 from apps.work.models import *
 from resources.models import Resources
 from custom.models import LogoImage, MovieWindow, OtherConnections
-from duty.models import Duty, DutyMan
+from duty.models import DutyMan
 from operation.models import Submission
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
@@ -94,15 +94,10 @@ class IndexView(View):
         now_time = datetime.now()
         week_now = datetime.now().weekday()
         try:
-            duty = Duty.objects.get(week=week_now)
-        except Duty.DoesNotExist:
-            duty = []
-        if duty:
-            duty_man_ld = duty.dutyman_set.order_by('-add_time').filter(type='ld')[0]
-            duty_man_mj = duty.dutyman_set.order_by('-add_time').filter(type='mj')[0]
-        else:
-            duty_man_ld = []
-            duty_man_mj = []
+            duty_man = DutyMan.objects.filter(time=week_now).order_by('-add_time')[0]
+        except duty_man.DoesNotExist:
+            duty_man = []
+
         # 各所链接
         other_urls = OtherConnections.objects.all().order_by('-add_time')
         # if other_urls:
@@ -128,8 +123,7 @@ class IndexView(View):
             'source_nums': source_nums,
             'logo': logo,
             'window': window,
-            'duty_man_ld': duty_man_ld,
-            'duty_man_mj': duty_man_mj,
+            'duty_man': duty_man,
             'time': now_time,
             'other_urls': other_urls
 

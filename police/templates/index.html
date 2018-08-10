@@ -287,11 +287,11 @@
 						<div class="block_a">今日值班</div>
 						<ul>
 							<li><span>值班日期：</span>{{ time|date:'Y-m-d' }}</li>
-							<li><span>带班领导：</span>{{ duty_man_ld.name }}</li>
-							<li><span>移动手机：</span>{{ duty_man_ld.phone }}</li>
-							<li><span>值班民警：</span>{{ duty_man_mj.name }}</li>
-							<li><span>值班电话：</span>{{ duty_man_mj.telephone }}</li>
-							<li><span>移动手机：</span>{{ duty_man_mj.phone }}</li>
+							<li><span>带班领导：</span>{{ duty_man.leader }}</li>
+							<li><span>移动手机：</span>{{ duty_man.leader_phone }}</li>
+							<li><span>值班民警：</span>{{ duty_man.follower }}</li>
+							<li><span>值班电话：</span>{{ duty_man.phone }}</li>
+							<li><span>移动手机：</span>{{ duty_man.follower_phone }}</li>
 						</ul>
 						<img align="center" style="margin-left: 10px;margin-top: 5px;" src="{% static 'img/v3.jpg' %}">
 						<img align="center" style="margin-left: 5px;margin-bottom: 5px;cursor: pointer;" src="{% static 'img/v4.jpg' %}">

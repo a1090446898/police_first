@@ -14,7 +14,7 @@ class CommunicationAdmin(object):
     #只读
     readonly_fields = ['read_volume']
 
-    exclude = ['is_imgText']
+    style_fields = {'content': 'ueditor'}
 
 
 class StudyGardenAdmin(object):
@@ -26,7 +26,7 @@ class StudyGardenAdmin(object):
     list_filter = ['title', 'source', 'read_volume', 'add_time']
     # 只读
     readonly_fields = ['read_volume']
-    exclude = ['is_imgText']
+    style_fields = {'content': 'ueditor'}
 
 
 xadmin.site.register(Communication, CommunicationAdmin)

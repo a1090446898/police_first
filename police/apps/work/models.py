@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.db import models
+from DjangoUeditor.models import UEditorField
 
 
 # Create your models here.
@@ -20,10 +21,10 @@ class Source(models.Model):
 
 class Notice(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = models.TextField(verbose_name='内容')
+    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='news/ueditor',
+                           filePath='notice/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=False, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
@@ -36,10 +37,10 @@ class Notice(models.Model):
 
 class Announcement(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = models.TextField(verbose_name='内容')
+    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='news/ueditor',
+                           filePath='announcement/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=False, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
@@ -52,10 +53,10 @@ class Announcement(models.Model):
 
 class WorkBulletin(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = models.TextField(verbose_name='内容')
+    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='news/ueditor',
+                           filePath='work_bulletin/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=False, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
@@ -68,10 +69,10 @@ class WorkBulletin(models.Model):
 
 class TeamSystem(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = models.TextField(verbose_name='内容')
+    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='news/ueditor',
+                           filePath='team_system/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=False, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
@@ -84,10 +85,10 @@ class TeamSystem(models.Model):
 
 class Laws(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = models.TextField(verbose_name='内容')
+    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='news/ueditor',
+                           filePath='laws/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
-    is_imgText = models.BooleanField(default=False, verbose_name='是否是图文')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
