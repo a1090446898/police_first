@@ -6,8 +6,7 @@ from django.views.generic.base import View
 from .models import *
 from apps.work.models import *
 from resources.models import Resources
-from custom.models import LogoImage, MovieWindow, OtherConnections
-from duty.models import DutyMan
+from custom.models import LogoImage, MovieWindow, OtherConnections, Duty
 from operation.models import Submission
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
@@ -17,13 +16,12 @@ from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 # 计数方法
 def nums(source):
-    # work模型
+    # work总数
     notice = source.notice_set.all().count()
     announcement = source.announcement_set.all().count()
     work_bulletin = source.workbulletin_set.all().count()
     team_system = source.teamsystem_set.all().count()
     laws = source.laws_set.all().count()
-    work_list = [notice, announcement, work_bulletin, team_system, laws]
     work_sum = notice + announcement + work_bulletin + team_system + laws
 
     # news总数
@@ -34,7 +32,6 @@ def nums(source):
     video = source.videopatrol_set.all().count()
     build = source.buildwork_set.all().count()
     news_sum = news + team + place + help_num + video + build
-    news_list = [news, team, place, help_num, video, build, news_sum]
     # 总数
     all_sum = work_sum + news_sum
     return all_sum
@@ -47,13 +44,33 @@ class IndexView(View):
         source_nums = {}
         sources = Source.objects.all()
 
+        all_nums = 0
+
         # 发帖排行
         for source in sources:
             source_nums[source] = nums(source)
+            all_nums += nums(source)
+
+        # 本站访问人数：
+        if Click.objects.all():
+            clicks = Click.objects.get(option=1)
+            clicks.index_click += 1
+            clicks.save()
+        else:
+            clicks = Click.objects.create(index_click=1)
+            clicks.save()
+
+        click = clicks.index_click
 
         # 监管要闻
         news = News.objects.all().order_by('-add_time')[:6]
-        title_new = news[0]
+        if news:
+            title_new = news[0]
+            title_new_id = title_new.id
+        else:
+            title_new = []
+            title_new_id = 0
+
         # 支队动态
         team_news = TeamNews.objects.all().order_by('-add_time')[:6]
         # 各地动态
@@ -93,20 +110,25 @@ class IndexView(View):
         # 值日0-6表示星期一到星期日
         now_time = datetime.now()
         week_now = datetime.now().weekday()
+
         try:
-            duty_man = DutyMan.objects.filter(time=week_now).order_by('-add_time')[0]
-        except duty_man.DoesNotExist:
-            duty_man = []
+            duty = Duty.objects.filter(week=week_now).order_by('-add_time')
+            if duty:
+                duty_man = duty[0]
+            else:
+                duty_man = []
+        except:
+            pass
 
         # 各所链接
         other_urls = OtherConnections.objects.all().order_by('-add_time')
-        # if other_urls:
-        #     other_urls = []
+        if other_urls:
+            other_urls = []
 
         return render(request, 'index.html', {
             'all_News_banner': news_banner,
             'all_News': news,
-            'new_title_id': title_new.id,
+            'new_title_id': title_new_id,
             'title_new': title_new,
             'all_team_news': team_news,
             'all_places_news': places_news,
@@ -121,12 +143,13 @@ class IndexView(View):
             'all_special_works': special_works,
             'all_resources': resources,
             'source_nums': source_nums,
+            'all_nums': all_nums,
+            'click': click,
             'logo': logo,
             'window': window,
-            'duty_man': duty_man,
+            # 'duty': duty_man,
             'time': now_time,
             'other_urls': other_urls
-
         })
 
 

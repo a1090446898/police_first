@@ -33,23 +33,26 @@ urlpatterns = [
     url(r'^work/', include('work.urls', namespace='work')),
     url(r'^resources/', include('resources.urls', namespace='resources')),
     url(r'^communication/', include('communication.urls', namespace='communication')),
+    url(r'^operation/', include('operation.urls', namespace='operation')),
+
 
     url(r'^$', IndexView.as_view(), name='Index'),
     url(r'^introduce/$', IntroduceView.as_view(), name='introduce'),
 
-    url(r'^operation/', include('operation.urls', namespace='operation')),
-    #配置上传文件访问处理
+
+    # 配置上传文件访问处理
     url(r'^media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
-    #静态文件访问路径
+    # 静态文件访问路径
     # url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 
 ]
 
-#全局404，500的配置
+
+# 全局404，500的配置
 handler404 = 'work.views.page_not_found'
 handler500 = 'work.views.page_error'
 
-#定时函数
+# 定时函数
 # sched = BackgroundScheduler()
 #
 #

@@ -7,7 +7,7 @@
 		<title>{% block title %}遵义市公安局监管支队{% endblock %}</title>
         {% block css_index %}
             <link rel="stylesheet" href="{% static 'css/index.css' %}" />
-            <link rel="stylesheet" href="{% static 'css/list_head.css' %}">
+            <link rel="stylesheet" href="{% static 'css/head.css' %}">
             <link rel="stylesheet" href="{% static 'css/style.css' %}" />
         {% endblock %}
         {% block js_index %}
@@ -286,12 +286,12 @@
 					<div class="Beonduty">
 						<div class="block_a">今日值班</div>
 						<ul>
-							<li><span>值班日期：</span>{{ time|date:'Y-m-d' }}</li>
-							<li><span>带班领导：</span>{{ duty_man.leader }}</li>
-							<li><span>移动手机：</span>{{ duty_man.leader_phone }}</li>
-							<li><span>值班民警：</span>{{ duty_man.follower }}</li>
-							<li><span>值班电话：</span>{{ duty_man.phone }}</li>
-							<li><span>移动手机：</span>{{ duty_man.follower_phone }}</li>
+							<li><span>值班日期：</span>{{  time|date:'Y-m-d' }}</li>
+							<li><span>带班领导：</span>{{ duty.leader }}</li>
+							<li><span>移动手机：</span>{{ duty.leader_phone }}</li>
+							<li><span>值班民警：</span>{{ duty.follower }}</li>
+							<li><span>值班电话：</span>{{ duty.telephone }}</li>
+							<li><span>移动手机：</span>{{ duty.follower_phone }}</li>
 						</ul>
 						<img align="center" style="margin-left: 10px;margin-top: 5px;" src="{% static 'img/v3.jpg' %}">
 						<img align="center" style="margin-left: 5px;margin-bottom: 5px;cursor: pointer;" src="{% static 'img/v4.jpg' %}">
@@ -321,9 +321,8 @@
 						<ul type="circle">
 							<li>签收文章数量：750</li>
 							<li>未签收的文章数量：2</li>
-							<li>文章总数量：3335</li>
-							<li>本月文章的总数量：0</li>
-							<li>站点总访问数：266562</li>
+							<li>文章总数量：{{ all_nums }}</li>
+							<li>站点总访问数：{{ click }}</li>
 						</ul>
 					</div>
 					<!--图-->

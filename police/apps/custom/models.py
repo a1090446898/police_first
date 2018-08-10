@@ -45,3 +45,21 @@ class OtherConnections(models.Model):
     def __str__(self):
         return self.title
 
+
+class Duty(models.Model):
+    week = models.IntegerField(choices=((0, '星期一'), (1, '星期二'), (2, '星期三')
+                                        , (3, '星期四'), (4, '星期五'), (5, '星期六')
+                                        , (6, '星期天')), default=0, verbose_name='值班星期')
+    leader_name = models.CharField(max_length=15, verbose_name='领导')
+    leader_phone = models.CharField(max_length=11, verbose_name='移动手机')
+    follower = models.CharField(max_length=10, verbose_name='民警')
+    telephone = models.CharField(max_length=11, verbose_name='值班电话')
+    follower_phone = models.CharField(max_length=11, verbose_name='移动手机')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
+
+    class Meta:
+        verbose_name = '值班表'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.week
