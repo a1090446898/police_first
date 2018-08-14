@@ -39,7 +39,7 @@ class AnnouncementList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -68,7 +68,7 @@ class WorkBulletinList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -80,7 +80,7 @@ class WorkBulletinList(View):
         })
 
 
-# 公示公告
+# 公示公告列表页
 class NoticeList(View):
     def get(self, request):
         # 进行选项
@@ -97,7 +97,7 @@ class NoticeList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -109,7 +109,7 @@ class NoticeList(View):
         })
 
 
-# 支队制度
+# 支队制度列表页
 class TeamSystemList(View):
     def get(self, request):
         # 进行选项
@@ -126,7 +126,7 @@ class TeamSystemList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -138,7 +138,7 @@ class TeamSystemList(View):
         })
 
 
-# 法律法规
+# 法律法规列表页
 class LawsList(View):
     def get(self, request):
         # 进行选项
@@ -155,7 +155,7 @@ class LawsList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -175,8 +175,12 @@ class AnnouncementDetails(View):
 
         if option == '1' or option == '':
             new_detail = Announcement.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail
@@ -192,8 +196,12 @@ class WorkBulletinDetails(View):
 
         if option == '1' or option == '':
             new_detail = WorkBulletin.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail
@@ -209,8 +217,12 @@ class NoticeDetails(View):
 
         if option == '1' or option == '':
             new_detail = Notice.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail
@@ -218,7 +230,7 @@ class NoticeDetails(View):
         })
 
 
-# 支队制度
+# 支队制度详情页
 class TeamSystemDetails(View):
     def get(self, request, detail_id):
         # 进行选项
@@ -226,8 +238,12 @@ class TeamSystemDetails(View):
 
         if option == '1' or option == '':
             new_detail = TeamSystem.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail
@@ -242,8 +258,12 @@ class LawsDetails(View):
 
         if option == '1' or option == '':
             new_detail = Laws.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail
@@ -252,13 +272,13 @@ class LawsDetails(View):
 
 # 404全局页面配置
 def page_not_found(request):
-    response = render_to_response('404.html',{})
+    response = render_to_response('404.html', {})
     response.status_code = 404
     return response
 
 
 # 500全局页面配置
 def page_error(request):
-    response = render_to_response('500.html',{})
+    response = render_to_response('500.html', {})
     response.status_code = 500
     return response

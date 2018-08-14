@@ -125,6 +125,10 @@ class IndexView(View):
         if other_urls:
             other_urls = []
 
+        # 签收文章数量统计：
+        inspect_success = Submission.objects.filter(is_pass=True).count()
+        inspect_fail = Submission.objects.filter(is_pass=False).count()
+
         return render(request, 'index.html', {
             'all_News_banner': news_banner,
             'all_News': news,
@@ -147,9 +151,11 @@ class IndexView(View):
             'click': click,
             'logo': logo,
             'window': window,
-            # 'duty': duty_man,
+            'duty': duty_man,
             'time': now_time,
-            'other_urls': other_urls
+            'other_urls': other_urls,
+            'inspect_success': inspect_success,
+            'inspect_fail': inspect_fail,
         })
 
 
@@ -170,7 +176,7 @@ class NewsList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -199,7 +205,7 @@ class TeamNewsList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -211,7 +217,7 @@ class TeamNewsList(View):
         })
 
 
-# 各地动态列表
+# 各地动态列表页
 class PlacesNewsList(View):
     def get(self, request):
         # 进行选项
@@ -228,7 +234,7 @@ class PlacesNewsList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -240,7 +246,7 @@ class PlacesNewsList(View):
         })
 
 
-# 协助破案
+# 协助破案列表页
 class HelpNewsList(View):
     def get(self, request):
         # 进行选项
@@ -257,7 +263,7 @@ class HelpNewsList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -269,7 +275,7 @@ class HelpNewsList(View):
         })
 
 
-# 视频巡查
+# 视频巡查列表页
 class VideoPatrolList(View):
     def get(self, request):
         # 进行选项
@@ -286,7 +292,7 @@ class VideoPatrolList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -298,7 +304,7 @@ class VideoPatrolList(View):
         })
 
 
-# 党建工作
+# 党建工作列表页
 class BuildWorkList(View):
     def get(self, request):
         # 进行选项
@@ -315,7 +321,7 @@ class BuildWorkList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 1, request=request)
+        p = Paginator(lists, 10, request=request)
 
         lists = p.page(page)
 
@@ -335,8 +341,12 @@ class NewsDetails(View):
 
         if option == '1' or option == '':
             new_detail = News.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail
@@ -352,8 +362,12 @@ class TeamNewsDetails(View):
 
         if option == '1' or option == '':
             new_detail = TeamNews.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail
@@ -369,8 +383,12 @@ class PlacesNewsDetails(View):
 
         if option == '1' or option == '':
             new_detail = PlacesNews.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail
@@ -386,8 +404,12 @@ class HelpNewsDetails(View):
 
         if option == '1' or option == '':
             new_detail = HelpNews.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail
@@ -403,8 +425,12 @@ class VideoPatroDetails(View):
 
         if option == '1' or option == '':
             new_detail = VideoPatrol.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail
@@ -420,8 +446,12 @@ class BuildWorkDetails(View):
 
         if option == '1' or option == '':
             new_detail = BuildWork.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
         else:
             new_detail = Submission.objects.get(id=int(detail_id))
+            new_detail.read_volume += 1
+            new_detail.save()
 
         return render(request, 'detail.html', {
             'new_detail': new_detail

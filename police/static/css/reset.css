@@ -74,7 +74,16 @@ html { overflow-y: scroll; }
 .relative{position:relative!important;}
 .clear{ clear:both;}
 .center{text-align:center;}
-.wp{width:1200px; margin:0 auto; position:relative;clear: both;}
+/*.wp{width:1200px; margin:0 auto; position:relative;clear: both;}*/
+.wp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 600px;
+
+}
 .clearfix::after {
     clear: both;
     content: " ";

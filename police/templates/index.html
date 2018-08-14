@@ -29,349 +29,359 @@
 	</head>
 
 	<body>
-		<!--头部背景-->
-		<div class="head_div">
-            <img class="head_img" src="{% if logo %}{{ MEDIA_URL }}{{ window.image }} {% else %} {% static 'img/TIM图片20180725135143.png' %} {% endif %}">
-        </div>
-		<!--导航-->
-		<div class="navigation">
-			<ul>
-                <a href="{% url 'Index' %}">
-				    <li>首页</li>
-                </a>
 
-				<a href="{% url 'introduce' %}">
-				    <li>支队介绍</li>
-                </a>
-
-                <a href="{% url 'news:news_list' %}">
-				    <li>监管要闻</li>
-                </a>
-
-				<a href="{% url 'communication:communication_list' %}">
-				    <li>经验交流</li>
-                </a>
-
-				<a href="{% url 'communication:study_garden_list' %}">
-				    <li>学习园地</li>
-                </a>
-
-				<a href="{% url 'resources:list' %}">
-				    <li>软件下载</li>
-                </a>
-
-				<li>信息化建设</li>
-				<li>网站导航</li>
-				<li>最新发布</li>
-				<li>旧版入口</li>
-				<li>投稿</li>
-			</ul>
-		</div>
-		<!--内容区-->
-        {% block content %}
-		<div class="content">
-			<!--居中的板块-->
-			<div class="middlecontent">
-				<!--头部标注-->
-				<div class="signin">
-					<div class="user_imgs">
-						<img src="{% static 'img/lock.png' %}">
-					</div>
-					<div class="user_name">
-						用户登录
-					</div>
-					<div class="but">
-                        <a href="/xadmin">
-                            <button id="aa">登录</button>
+        <div style="background: linear-gradient(#ABDBF1, #FFFFFF);">
+            <div class="all_head">
+                <!--头部背景-->
+                <div class="head_div">
+                    <img class="head_img" src="{% if logo %}{{ MEDIA_URL }}{{ window.image }} {% else %} {% static 'img/TIM图片20180725135143.png' %} {% endif %}">
+                </div>
+                <!--导航-->
+                <div class="navigation">
+                    <ul>
+                        <a href="{% url 'Index' %}">
+                            <li>首页</li>
                         </a>
 
-					</div>
-					<!--农历-->
-					<div class="lunarcalendar" id="lunarcalendar">
-					</div>
-					<!--年月分秒-->
-					<div class="time" id="time">
-					</div>
-				</div>
-				<div class="headphoto"></div>
-				<!--新闻内容-->
-				<div class="journalism_left">
-					<!--轮播-->
-					<div class="broadcast">
-						<div class="journalism">
-							<div class="journalism_img">
-								<img src="{% static 'img/imgText.png' %}"/>
+                        <a href="{% url 'introduce' %}">
+                            <li>支队介绍</li>
+                        </a>
 
-							</div>
-							<span>图片新闻</span>
-						</div>
-						<!---->
-						<div id="banner">
-							<!--文字溢出自己隐藏-->
-							<div id="banner_list">
-								 {% for banners in all_News_banner %}
-                                    <a href="{% url 'news:news_detail' banners.id %}" target="_blank"><img src="{{ MEDIA_URL }}{{ banners.image }}" title="{{ banners.title }}" alt="{{ banners.title }}" /></a>
-                                 {% endfor %}
-							</div>
-							<div id="banner_bg"></div>
-							<!--标题背景-->
-							<div id="banner_info"></div>
-							<!--标题-->
-							<ul>
-								{% for banner in all_News_banner %}
-                                    <li  {% if forloop.counter0 == 0 %}class="on"{% endif %}>{{ forloop.counter }}</li>
-                                {% endfor %}
-							</ul>
-						</div>
-					</div>
-					<!--监管要闻-->
-					<div class="focusnews">
-						<div class="block">监管要闻 <a class="block_span" href="{% url 'news:news_list' %}">更多>></a></div>
-						<div class="focusnews_a">
-							<a href="{% url 'news:news_detail' new_title_id %}" style="text-decoration:none" target="_blank"><p style="color:red" align="center">{{ title_new.title }}</p></a>
-							<p style="color: #1790D1">{{ title_new.introduce }}</p>
-						</div>
-						<div class="focusnews_b">
-							<ul>
-                                {% for new in all_News %}
-                                    {% if forloop.counter0 >= 1 %}
-                                        <li>
-									        <span class="spot"></span>
-									        <a href="{% url 'news:news_detail' new.id %}" target="_blank">{{ new.title|truncatewords:"30"}}<span class="a">[{{ new.add_time|date:'Y-m-d' }}]</span></a>
-								        </li>
-                                    {% endif %}
-								{% endfor %}
-							</ul>
-						</div>
-					</div>
-					<!--搜索-->
-					<!--通知通报-->
-					<div class="notified">
-                        <div class="block_b"><span>通知通报</span><span><a href="{% url 'work:announcement_list' %}">更多>></a></span></div>
-						<ul>
-                            {% for announcement in all_announcements %}
-                                <a href="{% url 'work:announcement_detail' announcement.id %}">
-								<li>
-                                    <div class="pictureimg"></div><span>[{{ announcement.source.name|truncatewords:"3" }}]</span>{{ announcement.title|truncatewords:"20" }}<span class="a">[{{ announcement.add_time|date:'Y-m-d' }}]</span>
-                                </li>
-							    </a>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!--工作简报-->
-					<div class="briefing">
-						<div class="block_b"><span>工作简报</span><span><a href="{% url 'work:work_bulletin_list' %}">更多>></a></span></div>
-						<ul>
-							{% for work_bulletin in all_work_bulletins %}
-                                <a href="{% url 'work:work_bulletin_detail' work_bulletin.id %}">
-								<li>
-                                    <div class="pictureimg"></div><span>[{{ work_bulletin.source.name|truncatewords:"3" }}]</span>{{ work_bulletin.title|truncatewords:"20" }}<span class="a">[{{ work_bulletin.add_time|date:'Y-m-d' }}]</span>
-                                </li>
-							    </a>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!--贴图-->
-					<div class="map">
-					</div>
-					<!--公示公告-->
-					<div class="notified">
-						<div class="block_b"><span>公示公告</span><span><a href="{% url 'work:notice_list' %}">更多>></a></span></div>
-						<ul>
-							{% for notice in all_notices %}
-                                <a href={% url 'work:notice_detail' notice.id %}>
-								<li>
-                                    <div class="pictureimg"></div><span>[{{ notice.source.name|truncatewords:"3" }}]</span>{{ notice.title|truncatewords:"20" }}<span class="a">[{{ notice.add_time|date:'Y-m-d' }}]</span>
-                                </li>
-							    </a>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!--支队制度-->
-					<div class="briefing">
-						<div class="block_b"><span>支队制度</span><span><a href="{% url 'work:team_system_list' %}">更多>></a></span></div>
-						<ul>
-							{% for team_system in all_team_systems %}
-                                <a href={% url 'work:team_system_detail' team_system.id %}>
-								<li>
-                                    <div class="pictureimg"></div><span>[{{ team_system.source.name|truncatewords:"3" }}]</span>{{ team_system.title|truncatewords:"20" }}<span class="a">[{{ team_system.add_time|date:'Y-m-d' }}]</span>
-                                </li>
-							    </a>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!--支队动态-->
-					<div class="notified">
-						<div class="block_b"><span>支队动态</span><span><a href="{% url 'news:team_news_list' %}">更多>></a></span></div>
-						<ul>
-							{% for team_new in all_team_news %}
-                                <a href="{% url 'news:team_news_detail' team_new.id %}">
-								<li>
-                                    <div class="pictureimg"></div><span>[{{ team_new.source.name|truncatewords:"3" }}]</span>{{ team_new.title|truncatewords:"20" }}<span class="a">[{{ team_new.add_time|date:'Y-m-d' }}]</span>
-                                </li>
-							    </a>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!--各地动态-->
-					<div class="briefing">
-						<div class="block_b"><span>各地动态</span><span><a href="{% url 'news:places_news_list' %}">更多>></a></span></div>
-						<ul>
-							{% for places_new in all_places_news %}
-                                <a href="{% url 'news:places_news_detail' places_new.id %}">
-								<li>
-                                    <div class="pictureimg"></div><span>[{{ places_new.source.name|truncatewords:"3" }}]</span>{{ places_new.title|truncatewords:"20" }}<span class="a">[{{ places_new.add_time|date:'Y-m-d' }}]</span>
-                                </li>
-							    </a>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!--协助破案-->
-					<div class="notified">
-						<div class="block_b"><span>协助破案</span><span><a href="{% url 'news:help_news_list' %}">更多>></a></span></div>
-						<ul>
-							{% for help_new in all_help_news %}
-                                <a href="{% url 'news:help_news_detail' help_new.id %}">
-								<li>
-                                    <div class="pictureimg"></div><span>[{{ help_new.source.name|truncatewords:"3" }}]</span>{{ help_new.title|truncatewords:"20" }}<span class="a">[{{ help_new.add_time|date:'Y-m-d' }}]</span>
-                                </li>
-							    </a>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!--视频巡查-->
-					<div class="briefing">
-						<div class="block_b"><span>视频巡查</span><span><a href="{% url 'news:video_patrol_list' %}">更多>></a></span></div>
-						<ul>
-							{% for video_natrol in all_video_natrols %}
-                                <a href="{% url 'news:video_patrol_detail' video_natrol.id %}">
-								<li>
-                                    <div class="pictureimg"></div><span>[{{ video_natrol.source.name|truncatewords:"3" }}]</span>{{ video_natrol.title|truncatewords:"20" }}<span class="a">[{{ video_natrol.add_time|date:'Y-m-d' }}]</span>
-                                </li>
-							    </a>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!--法律法规-->
-					<div class="notified">
-						<div class="block_b"><span>法律法规</span><span><a href="{% url 'work:laws_list' %}">更多>></a></span></div>
-						<ul>
-							{% for law in all_laws %}
-                                <a href="{% url 'work:laws_detail' law.id %}">
-								<li>
-                                    <div class="pictureimg"></div><span>[{{ law.source.name|truncatewords:"3" }}]</span>{{ law.title|truncatewords:"20" }}<span class="a">[{{ law.add_time|date:'Y-m-d' }}]</span>
-                                </li>
-							    </a>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!--党建工作-->
-					<div class="briefing">
-						<div class="block_b"><span>党建工作</span><span><a href="{% url 'news:build_work_list' %}">更多>></a></span></div>
-						<ul>
-							{% for build_work in all_build_works %}
-                                <a href="{% url 'news:build_work_detail' build_work.id %}">
-								<li>
-                                    <div class="pictureimg"></div><span>[{{ build_work.source.name|truncatewords:"3" }}]</span>{{ build_work.title|truncatewords:"20" }}<span class="a">[{{ build_work.add_time|date:'Y-m-d' }}]</span>
-                                </li>
-							    </a>
-                            {% endfor %}
-						</ul>
-					</div>
-				</div>
+                        <a href="{% url 'news:news_list' %}">
+                            <li>监管要闻</li>
+                        </a>
 
-				<!--右边模块-->
-				<div class="journalism_right">
-					<!--今日值班-->
-					<div class="Beonduty">
-						<div class="block_a">今日值班</div>
-						<ul>
-							<li><span>值班日期：</span>{{  time|date:'Y-m-d' }}</li>
-							<li><span>带班领导：</span>{{ duty.leader }}</li>
-							<li><span>移动手机：</span>{{ duty.leader_phone }}</li>
-							<li><span>值班民警：</span>{{ duty.follower }}</li>
-							<li><span>值班电话：</span>{{ duty.telephone }}</li>
-							<li><span>移动手机：</span>{{ duty.follower_phone }}</li>
-						</ul>
-						<img align="center" style="margin-left: 10px;margin-top: 5px;" src="{% static 'img/v3.jpg' %}">
-						<img align="center" style="margin-left: 5px;margin-bottom: 5px;cursor: pointer;" src="{% static 'img/v4.jpg' %}">
-					</div>
-					<!--法律文书模板下载-->
-					<div class="column">
-						<div class="block_a">法律文书模板下载<a class="a" href="{% url 'resources:list' %}"><span>更多>></span></a></div>
-						<ul>
-                            {% for resource in all_resources %}
-                                <a href="{{ MEDIA_URL }}{{ resource.download }}">
-                                    <span class="spot"></span>
-							        <li>{{ resource.title }}</li>
-                                </a>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!--专项工作-->
-					<div class="column-a">
-						<div class="block_a">专项工作</div>
-                        {% for special_work in all_special_works%}
-						    <p>{{ special_work.title }}：{{ special_work.data }}</p>
-                        {% endfor %}
-					</div>
-					<!--本站统计-->
-					<div class="column-a">
-						<div class="block_a">本站统计</div>
-						<ul type="circle">
-							<li>签收文章数量：750</li>
-							<li>未签收的文章数量：2</li>
-							<li>文章总数量：{{ all_nums }}</li>
-							<li>站点总访问数：{{ click }}</li>
-						</ul>
-					</div>
-					<!--图-->
-					<div class="chart">
+                        <a href="{% url 'conversation:communication_list' %}">
+                            <li>经验交流</li>
+                        </a>
 
-					</div>
-					<!--信息发布排行榜-->
-					<div class="column-a">
-						<div class="block_a">信息发布排行榜</div>
-                        <ul>
-                            {% for source,value in source_nums.items %}
-                                <li>{{ source.name }}：{{ value }}</li>
-                            {% endfor %}
+                        <a href="{% url 'conversation:study_garden_list' %}">
+                            <li>学习园地</li>
+                        </a>
 
-                        </ul>
-					</div>
-					<!--各所连接-->
-                    <div class="column">
-						<div class="block_a">各所链接</div>
-						    <ul>
-                                {% for url in other_urls %}
-                                    <a href="{{ url.url }}" target="_blank">
-                                        <span class="spot"></span>
-                                        <li>{{ url.title }}</li>
+                        <a href="{% url 'resources:list' %}">
+                            <li>软件下载</li>
+                        </a>
+
+                        <li>信息化建设</li>
+                        <li>网站导航</li>
+                        <li>最新发布</li>
+                        <li>旧版入口</li>
+
+                        <a href="{% url 'operation:formAsk' %}">
+                            <li>投稿</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <!--内容区-->
+            {% block content %}
+            <div class="index_content">
+                <!--居中的板块-->
+                <div class="index_middlecontent">
+                    <!--头部标注-->
+                    <div class="signin">
+                        <div class="user_imgs">
+                            <img src="{% static 'img/lock.png' %}">
+                        </div>
+                        <div class="user_name">
+                            用户登录
+                        </div>
+                        <div class="but">
+                            <a href="/xadmin">
+                                <button id="aa">登录</button>
+                            </a>
+
+                        </div>
+                        <!--农历-->
+                        <div class="lunarcalendar" id="lunarcalendar">
+                        </div>
+                        <!--年月分秒-->
+                        <div class="time" id="time">
+                        </div>
+                    </div>
+                    <div class="headphoto"></div>
+                    <!--新闻内容-->
+                    <div class="journalism_left">
+                        <!--轮播-->
+                        <div class="broadcast">
+                            <div class="journalism">
+                                <div class="journalism_img">
+                                    <img src="{% static 'img/imgText.png' %}"/>
+
+                                </div>
+                                <span>图片新闻</span>
+                            </div>
+                            <!---->
+                            <div id="banner">
+                                <!--文字溢出自己隐藏-->
+                                <div id="banner_list">
+                                     {% for banners in all_News_banner %}
+                                        <a href="{% url 'news:news_detail' banners.id %}" target="_blank"><img src="{{ MEDIA_URL }}{{ banners.image }}" title="{{ banners.title }}" alt="{{ banners.title }}" /></a>
+                                     {% endfor %}
+                                </div>
+                                <div id="banner_bg"></div>
+                                <!--标题背景-->
+                                <div id="banner_info"></div>
+                                <!--标题-->
+                                <ul>
+                                    {% for banner in all_News_banner %}
+                                        <li  {% if forloop.counter0 == 0 %}class="on"{% endif %}>{{ forloop.counter }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!--监管要闻-->
+                        <div class="focusnews">
+                            <div class="block">监管要闻 <a class="block_span" href="{% url 'news:news_list' %}">更多>></a></div>
+                            <div class="focusnews_a">
+                                <a href="{% url 'news:news_detail' new_title_id %}" style="text-decoration:none" target="_blank"><p style="color:red" align="center">{{ title_new.title }}</p></a>
+                                <p style="color: #1790D1">{{ title_new.introduce }}</p>
+                            </div>
+                            <div class="focusnews_b">
+                                <ul>
+                                    {% for new in all_News %}
+                                        {% if forloop.counter0 >= 1 %}
+                                            <li>
+                                                <span class="spot"></span>
+                                                <a href="{% url 'news:news_detail' new.id %}" target="_blank">{{ new.title|truncatewords:"30"}}<span class="a">[{{ new.add_time|date:'Y-m-d' }}]</span></a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <!--搜索-->
+                        <!--通知通报-->
+                        <div class="notified">
+                            <div class="block_b"><span>通知通报</span><span><a href="{% url 'work:announcement_list' %}">更多>></a></span></div>
+                            <ul>
+                                {% for announcement in all_announcements %}
+                                    <a href="{% url 'work:announcement_detail' announcement.id %}">
+                                    <li>
+                                        <div class="pictureimg"></div><span>[{{ announcement.source.name|truncatewords:"3" }}]</span>{{ announcement.title|truncatewords:"20" }}<span class="a">[{{ announcement.add_time|date:'Y-m-d' }}]</span>
+                                    </li>
                                     </a>
-
                                 {% endfor %}
                             </ul>
-					</div>
+                        </div>
+                        <!--工作简报-->
+                        <div class="briefing">
+                            <div class="block_b"><span>工作简报</span><span><a href="{% url 'work:work_bulletin_list' %}">更多>></a></span></div>
+                            <ul>
+                                {% for work_bulletin in all_work_bulletins %}
+                                    <a href="{% url 'work:work_bulletin_detail' work_bulletin.id %}">
+                                    <li>
+                                        <div class="pictureimg"></div><span>[{{ work_bulletin.source.name|truncatewords:"3" }}]</span>{{ work_bulletin.title|truncatewords:"20" }}<span class="a">[{{ work_bulletin.add_time|date:'Y-m-d' }}]</span>
+                                    </li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--贴图-->
+                        <div class="map">
+                        </div>
+                        <!--公示公告-->
+                        <div class="notified">
+                            <div class="block_b"><span>公示公告</span><span><a href="{% url 'work:notice_list' %}">更多>></a></span></div>
+                            <ul>
+                                {% for notice in all_notices %}
+                                    <a href={% url 'work:notice_detail' notice.id %}>
+                                    <li>
+                                        <div class="pictureimg"></div><span>[{{ notice.source.name|truncatewords:"3" }}]</span>{{ notice.title|truncatewords:"20" }}<span class="a">[{{ notice.add_time|date:'Y-m-d' }}]</span>
+                                    </li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--支队制度-->
+                        <div class="briefing">
+                            <div class="block_b"><span>支队制度</span><span><a href="{% url 'work:team_system_list' %}">更多>></a></span></div>
+                            <ul>
+                                {% for team_system in all_team_systems %}
+                                    <a href={% url 'work:team_system_detail' team_system.id %}>
+                                    <li>
+                                        <div class="pictureimg"></div><span>[{{ team_system.source.name|truncatewords:"3" }}]</span>{{ team_system.title|truncatewords:"20" }}<span class="a">[{{ team_system.add_time|date:'Y-m-d' }}]</span>
+                                    </li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--支队动态-->
+                        <div class="notified">
+                            <div class="block_b"><span>支队动态</span><span><a href="{% url 'news:team_news_list' %}">更多>></a></span></div>
+                            <ul>
+                                {% for team_new in all_team_news %}
+                                    <a href="{% url 'news:team_news_detail' team_new.id %}">
+                                    <li>
+                                        <div class="pictureimg"></div><span>[{{ team_new.source.name|truncatewords:"3" }}]</span>{{ team_new.title|truncatewords:"20" }}<span class="a">[{{ team_new.add_time|date:'Y-m-d' }}]</span>
+                                    </li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--各地动态-->
+                        <div class="briefing">
+                            <div class="block_b"><span>各地动态</span><span><a href="{% url 'news:places_news_list' %}">更多>></a></span></div>
+                            <ul>
+                                {% for places_new in all_places_news %}
+                                    <a href="{% url 'news:places_news_detail' places_new.id %}">
+                                    <li>
+                                        <div class="pictureimg"></div><span>[{{ places_new.source.name|truncatewords:"3" }}]</span>{{ places_new.title|truncatewords:"20" }}<span class="a">[{{ places_new.add_time|date:'Y-m-d' }}]</span>
+                                    </li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--协助破案-->
+                        <div class="notified">
+                            <div class="block_b"><span>协助破案</span><span><a href="{% url 'news:help_news_list' %}">更多>></a></span></div>
+                            <ul>
+                                {% for help_new in all_help_news %}
+                                    <a href="{% url 'news:help_news_detail' help_new.id %}">
+                                    <li>
+                                        <div class="pictureimg"></div><span>[{{ help_new.source.name|truncatewords:"3" }}]</span>{{ help_new.title|truncatewords:"20" }}<span class="a">[{{ help_new.add_time|date:'Y-m-d' }}]</span>
+                                    </li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--视频巡查-->
+                        <div class="briefing">
+                            <div class="block_b"><span>视频巡查</span><span><a href="{% url 'news:video_patrol_list' %}">更多>></a></span></div>
+                            <ul>
+                                {% for video_natrol in all_video_natrols %}
+                                    <a href="{% url 'news:video_patrol_detail' video_natrol.id %}">
+                                    <li>
+                                        <div class="pictureimg"></div><span>[{{ video_natrol.source.name|truncatewords:"3" }}]</span>{{ video_natrol.title|truncatewords:"20" }}<span class="a">[{{ video_natrol.add_time|date:'Y-m-d' }}]</span>
+                                    </li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--法律法规-->
+                        <div class="notified">
+                            <div class="block_b"><span>法律法规</span><span><a href="{% url 'work:laws_list' %}">更多>></a></span></div>
+                            <ul>
+                                {% for law in all_laws %}
+                                    <a href="{% url 'work:laws_detail' law.id %}">
+                                    <li>
+                                        <div class="pictureimg"></div><span>[{{ law.source.name|truncatewords:"3" }}]</span>{{ law.title|truncatewords:"20" }}<span class="a">[{{ law.add_time|date:'Y-m-d' }}]</span>
+                                    </li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--党建工作-->
+                        <div class="briefing">
+                            <div class="block_b"><span>党建工作</span><span><a href="{% url 'news:build_work_list' %}">更多>></a></span></div>
+                            <ul>
+                                {% for build_work in all_build_works %}
+                                    <a href="{% url 'news:build_work_detail' build_work.id %}">
+                                    <li>
+                                        <div class="pictureimg"></div><span>[{{ build_work.source.name|truncatewords:"3" }}]</span>{{ build_work.title|truncatewords:"20" }}<span class="a">[{{ build_work.add_time|date:'Y-m-d' }}]</span>
+                                    </li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <!--右边模块-->
+                    <div class="journalism_right">
+                        <!--今日值班-->
+                        <div class="Beonduty">
+                            <div class="block_a">今日值班</div>
+                            <ul>
+                                <li><span>值班日期：</span>{{  time|date:'Y-m-d' }}</li>
+                                <li><span>带班领导：</span>{{ duty.leader }}</li>
+                                <li><span>移动手机：</span>{{ duty.leader_phone }}</li>
+                                <li><span>值班民警：</span>{{ duty.follower }}</li>
+                                <li><span>值班电话：</span>{{ duty.telephone }}</li>
+                                <li><span>移动手机：</span>{{ duty.follower_phone }}</li>
+                            </ul>
+                            <img align="center" style="margin-left: 10px;margin-top: 5px;" src="{% static 'img/v3.jpg' %}">
+                            <a href="{% url 'custom:duty' %}">
+                                <img align="center" style="margin-left: 5px;margin-bottom: 5px;cursor: pointer;" src="{% static 'img/v4.jpg' %}">
+                            </a>
+
+                        </div>
+                        <!--法律文书模板下载-->
+                        <div class="column">
+                            <div class="block_a">法律文书模板下载<a class="a" href="{% url 'resources:list' %}"><span>更多>></span></a></div>
+                            <ul>
+                                {% for resource in all_resources %}
+                                    <a href="{{ MEDIA_URL }}{{ resource.download }}">
+                                        <span class="spot"></span>
+                                        <li>{{ resource.title }}</li>
+                                    </a>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--专项工作-->
+                        <div class="column-a">
+                            <div class="block_a">专项工作</div>
+                            {% for special_work in all_special_works%}
+                                <p>{{ special_work.title }}：{{ special_work.data }}</p>
+                            {% endfor %}
+                        </div>
+                        <!--本站统计-->
+                        <div class="column-a">
+                            <div class="block_a">本站统计</div>
+                            <ul type="circle">
+                                <li>签收文章数量：{{ inspect_success }}</li>
+                                <li>未签收的文章数量：{{ inspect_fail }}</li>
+                                <li>文章总数量：{{ all_nums }}</li>
+                                <li>站点总访问数：{{ click }}</li>
+                            </ul>
+                        </div>
+                        <!--图-->
+                        <div class="chart">
+
+                        </div>
+                        <!--信息发布排行榜-->
+                        <div class="column-a">
+                            <div class="block_a">信息发布排行榜</div>
+                            <ul>
+                                {% for source,value in source_nums.items %}
+                                    <li>{{ source.name }}：{{ value }}</li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                        <!--各所连接-->
+                        <div class="column">
+                            <div class="block_a">各所链接</div>
+                                <ul>
+                                    {% for url in other_urls %}
+                                        <a href="{{ url.url }}" target="_blank">
+                                            <span class="spot"></span>
+                                            <li>{{ url.title }}</li>
+                                        </a>
+
+                                    {% endfor %}
+                                </ul>
+                        </div>
+                    </div>
+                    <!--页尾-->
+                    <div class="footer">
+                        <img src="{% static 'img/v5.jpg' %}" style="float: left;margin-left: 100px;margin-top: 25px;">
+                        <div style="float: left;margin-left: 20px;margin-top: 25px;">
+                            <p>主办单位：遵义市公安局监管支局&nbsp;&nbsp;联系电话：0852-8323311&nbsp;&nbsp;8323306&nbsp;&nbsp;管理员登录</p>
+                            <p>Copyright&nbsp;&nbsp;2014遵义市公安局监管支队&nbsp;版权所有&nbsp;All rights reserved</p>
+                            <p>设计制作：贵州省遵义市联合网络通信网络有限公司&nbsp;&nbsp;维护QQ：888888&nbsp;&nbsp;客户端IP地址：192.168.1.1</p>
+                        </div>
+                        <img src="{% static 'img/v6.jpg' %}" style="float:left;margin-left: 20px;margin-top: 20px;">
+                    </div>
                 </div>
-				    <!--页尾-->
-                <div class="footer">
-					<img src="{% static 'img/v5.jpg' %}" style="float: left;margin-left: 100px;margin-top: 25px;">
-					<div style="float: left;margin-left: 20px;margin-top: 25px;">
-						<p>主办单位：遵义市公安局监管支局&nbsp;&nbsp;联系电话：0852-8323311&nbsp;&nbsp;8323306&nbsp;&nbsp;管理员登录</p>
-						<p>Copyright&nbsp;&nbsp;2014遵义市公安局监管支队&nbsp;版权所有&nbsp;All rights reserved</p>
-						<p>设计制作：贵州省遵义市联合网络通信网络有限公司&nbsp;&nbsp;维护QQ：888888&nbsp;&nbsp;客户端IP地址：192.168.1.1</p>
-					</div>
-					<img src="{% static 'img/v6.jpg' %}" style="float:left;margin-left: 20px;margin-top: 20px;">
-				</div>
+            </div>
 
-			</div>
-		</div>
-
-        <div id="FlAD" style="position:absolute;z-index:10;left:100px;top:100px" onmouseover="clearInterval(interval)" onmouseout="interval = setInterval('changePos()', delay)">
+            <div id="FlAD" style="position:absolute;z-index:10;left:100px;top:100px" onmouseover="clearInterval(interval)" onmouseout="interval = setInterval('changePos()', delay)">
                 <p style="color:red;float:right;font-size:12px;cursor:pointer;" onClick="img.style.visibility = 'hidden'">关闭</p>
                 <a href="#" target="_blank" title="遵义市公安局"><img src="{% if window %}{{ MEDIA_URL }}{{ window.image }} {% else %} {% static 'img/v6.jpg' %} {% endif %}" alt="" width="160" border="0" /></a>
             </div>
-        {% endblock %}
+            {% endblock %}
+        </div>
+
 	</body>
 
 	<script>

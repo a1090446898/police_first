@@ -32,8 +32,9 @@ urlpatterns = [
     url(r'^news/', include('news.urls', namespace='news')),
     url(r'^work/', include('work.urls', namespace='work')),
     url(r'^resources/', include('resources.urls', namespace='resources')),
-    url(r'^communication/', include('communication.urls', namespace='communication')),
+    url(r'^conversation/', include('conversation.urls', namespace='conversation')),
     url(r'^operation/', include('operation.urls', namespace='operation')),
+    url(r'^custom/', include('custom.urls', namespace='custom')),
 
 
     url(r'^$', IndexView.as_view(), name='Index'),

@@ -1,10 +1,11 @@
 from django.conf.urls import url, include
 
-# from .views import EmailAsk, FormAsk
+from .views import SubmissionAsk, SuccessView
 
 
 urlpatterns = [
-    # url(r'^$', FormAsk.as_view(), name='formAsk'),
-    # url(r'^email_ask/$', EmailAsk.as_view(), name='emailAsk'),
+    url(r'^$', SubmissionAsk.as_view(), name='formAsk'),
+    url(r'^form_submission/$', SubmissionAsk.as_view(), name='form_submission'),
+    url(r'^success/$', SuccessView.as_view(), name='success'),
 
 ]

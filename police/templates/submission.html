@@ -1,0 +1,83 @@
+{% extends 'list.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/submission.css' %}" />
+{% endblock %}
+
+{% block head_titl %}
+    <span style="margin-left: 30px">根据国家相关法律法规要求，切勿上传任何色情、低俗、涉政等违法违规内容。一旦出现，我们将会根据法规进行审核处理。</span>
+{% endblock %}
+
+{% block mid_content %}
+    <form method="post" action="{% url 'operation:form_submission' %}">
+        <div class="error">
+            {{ error }}
+        </div>
+        <div class="submission_content">
+            <div class="submission_item">
+                <input class="submission_title" name="title" type="text" placeholder="请输入标题" value="{{ title }}">
+                <span>*</span>
+            </div>
+            <div class="submission_item">
+                <textarea name="content" placeholder="请输入正文...">{{ content }}</textarea>
+                <span>*</span>
+            </div>
+            <div class="submission_item">
+                <input class="submission_name" name="name" type="text" placeholder="请输入姓名"
+                    style='font: 16px/40px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif";' value="{{ sub_name }}"
+                >
+                <span>*</span>
+            </div>
+            <div class="submission_item">
+                <input class="submission_phone" name="phone" type="text" placeholder="请输入手机号码"
+                style='font: 16px/40px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif";' value="{{ phone }}"
+                >
+                <span>*</span>
+            </div>
+            <div class="submission_item">
+                <input class="submission_address" name="address" type="text" placeholder="请输入地址"
+                style='font: 16px/40px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif";' value="{{ address }}"
+                >
+                <span>*</span>
+            </div>
+            <div class="submission_item">
+                <input class="submission_email" name="email" type="text" placeholder="请输入邮箱"
+                style='font: 16px/40px "PingFangSC-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Microsoft YaHei", "sans-serif";' value="{{ email }}"
+                >
+                <span>*</span>
+            </div>
+            <div class="submission_item_btn">
+                <input class="submission_btn" type="submit" id="jsStayBtn" value="提交"
+                style=""
+                >
+            </div>
+        </div>
+    {% csrf_token %}
+    </form>
+{% endblock %}
+
+<script>
+    $(function(){
+        $(document).ready(function() {
+            $('#jsStayBtn').on('click', function () {
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    url: "{% url 'operation:emailAsk' %}",
+                    data: $('#jsStayForm').serialize(),
+                    async: true,
+                    success: function (data) {
+                        if (data.status == 'success') {
+                            $('#jsStayForm')[0].reset();
+                            alert("提交成功")
+                        } else if (data.status == 'fail') {
+                            $('#jsCompanyTips').html(data.msg)
+                        }
+                    },
+                });
+            });
+        });
+    })
+
+</script>

@@ -1,0 +1,40 @@
+.detail_article{
+    margin: 10px 0;
+    /*padding: 0 30px;*/
+}
+
+.detail_title{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 30px;
+    color: #069be5;
+    line-height: 1.5;
+    padding: 10px 0;
+}
+
+.detail_attribute{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*background: #f8f8f8;*/
+    color: #777777;
+    border-top: 3px solid #069be5;
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 15px 0;
+}
+
+.detail_attribute span{
+    padding-left: 20px;
+}
+
+.detail_content{
+    margin-top: 35px;
+    font-size: 14px;
+    color: #333333;
+    font-family: "Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,Verdana,sans-serif,"WenQuanYi Micro Hei","\5B8B\4F53";
+    -webkit-font-smoothing: antialiased;
+    min-height: 800px;
+
+}

@@ -1,8 +1,11 @@
-{% extends 'index.html' %}
+{% extends 'list.html' %}
 {% load staticfiles %}
 
 {% block style_index %}
     <style>
+            .introduce_content{
+                min-height: 600px;
+            }
 			.title {
 				text-align: center;
 				padding-top: 10px;
@@ -14,112 +17,98 @@
 				padding: 0 10px;
 			}
 			
-			.tab {
+			.introduce_tab {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
 				width: 100%;
+                height: 100%;
 			}
 			
-			.tab table {
+			.introduce_tab table {
+                margin:30px 0;
 				border-right: 1px solid gainsboro;
 				border-bottom: 1px solid gainsboro;
 			}
 			
-			.tab table td {
+			.introduce_tab table td {
+                height: 50px;
+                padding-left: 10px;
+                line-height: 50px;
 				border-left: 1px solid gainsboro;
 				border-top: 1px solid gainsboro;
 			}
 
 		</style>
 {% endblock %}
-{% block css_index %}
-    <link rel="stylesheet" href="{% static 'css/introduce.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/head.css' %}">
-{% endblock %}
-{% block content %}
-	<body>
-		<!--内容区-->
-		<div class="content">
-			<!--居中的板块-->
-			<div class="middlecontent">
-				<!--头部标注-->
-				<div class="signin">
-					当前位置:{{ name }}
-					<bottom class="v">返回首页</bottom>
-				</div>
 
-				<!--主要内容-->
-				<div class="title">遵义市公安局监管支队简介</div>
-				<div class="tab">
-					<table width="100%" border="0">
-						<tr>
-							<td>机构名称</td>
-							<td>遵义市公安局监管支队</td>
-						</tr>
-						<tr>
-							<td>机构地址</td>
-							<td>遵义市观山湖区黔灵山路306号</td>
-						</tr>
-						<tr>
-							<td>机构简介</td>
-							<td>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;贵阳市公安局是贵阳市政府主管全市公安工作的职能部门，机构规格为正县级，共有内设机构34个，其中正处级机构5</p>
-								<p>个，副处级机构20个，正科级机构4个，正科级事业单位4个，副科级事业机构1个。垂直管理6个城区分局(云岩分局、南明</p>
-							</td>
-						</tr>
-						<tr>
-							<td>机构职能</td>
-							<td>
-								<p>1、贯彻执行党和国家有关公安工作的方针、政策和法律、法规，结合实际研究制定贯彻意见和措施;领导和监督检查全市公安工作。</p>
-								<p>2、向区(市、县)公安(分)局传达市委、市政府和上级公安机关的指示，并监督落实。</p>
-								<p>3、组织指导全市重大案件和跨区域重大案件的侦破工作;协调、指挥处置重大治安案件和突发事件。</p>
-							</td>
-						</tr>
-						<tr>
-							<td>机构负责人</td>
-							<td>张二牛</td>
-						</tr>
-						<tr>
-							<td>联系方式</td>
-							<td>1888888888</td>
-						</tr>
-						<tr>
-							<td>办公时间</td>
-							<td>周一到周五 09:00-17:00</td>
-						</tr>
-						<tr>
-							<td>邮政编码</td>
-							<td>846515</td>
-						</tr>
-						<tr>
-							<td>电子邮箱</td>
-							<td>2195926950@qq.com</td>
-						</tr>
-						<tr>
-							<td>网站地址</td>
-							<td>gaj.gygov.gov.cn</td>
-						</tr>
-						<tr>
-							<td>受理投诉部门</td>
-							<td>市局纪委、督察支队</td>
-						</tr>
-						<tr>
-							<td>受理投诉电话</td>
-							<td>1888888888</td>
-						</tr>
-						<tr>
-							<td>交通指引</td>
-							<td>15684651684518645646815</td>
-						</tr>
-					</table>
-				</div>
+{% block mid_content %}
+    <!--主要内容-->
+    <div class="introduce_content">
+        <div class="title">遵义市公安局监管支队简介</div>
+        <div class="introduce_tab">
+            <table width="100%" border="0">
+                <tr>
+                    <td>机构名称</td>
+                    <td>遵义市公安局监管支队</td>
+                </tr>
+                <tr>
+                    <td>机构地址</td>
+                    <td>遵义市观山湖区黔灵山路306号</td>
+                </tr>
+                <tr>
+                    <td>机构简介</td>
+                    <td>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;贵阳市公安局是贵阳市政府主管全市公安工作的职能部门，机构规格为正县级，共有内设机构34个，其中正处级机构5</p>
+                        <p>个，副处级机构20个，正科级机构4个，正科级事业单位4个，副科级事业机构1个。垂直管理6个城区分局(云岩分局、南明</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>机构职能</td>
+                    <td>
+                        <p>1、贯彻执行党和国家有关公安工作的方针、政策和法律、法规，结合实际研究制定贯彻意见和措施;领导和监督检查全市公安工作。</p>
+                        <p>2、向区(市、县)公安(分)局传达市委、市政府和上级公安机关的指示，并监督落实。</p>
+                        <p>3、组织指导全市重大案件和跨区域重大案件的侦破工作;协调、指挥处置重大治安案件和突发事件。</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>机构负责人</td>
+                    <td>张二牛</td>
+                </tr>
+                <tr>
+                    <td>联系方式</td>
+                    <td>1888888888</td>
+                </tr>
+                <tr>
+                    <td>办公时间</td>
+                    <td>周一到周五 09:00-17:00</td>
+                </tr>
+                <tr>
+                    <td>邮政编码</td>
+                    <td>846515</td>
+                </tr>
+                <tr>
+                    <td>电子邮箱</td>
+                    <td>2195926950@qq.com</td>
+                </tr>
+                <tr>
+                    <td>网站地址</td>
+                    <td>gaj.gygov.gov.cn</td>
+                </tr>
+                <tr>
+                    <td>受理投诉部门</td>
+                    <td>市局纪委、督察支队</td>
+                </tr>
+                <tr>
+                    <td>受理投诉电话</td>
+                    <td>1888888888</td>
+                </tr>
+                <tr>
+                    <td>交通指引</td>
+                    <td>15684651684518645646815</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
-				<!--页尾-->
-				<div class="bottom" align="center">
-					<p>版权所有：遵义市公安局监管支局&nbsp;地址：贵阳市观山湖区黔灵山250号&nbsp;报警电话：110（24）&nbsp;服务电话</p>
-					<p>网站维护：贵阳市公安局指挥中心网办&nbsp;&nbsp;技术支持：海颐软件，海普科技</p>
-					<p>今日访问量124次，总访问量154615次</p>
-					<img src="{% static 'img/v6.jpg' %}">
-				</div>
-			</div>
-		</div>
-	</body>
 {% endblock %}

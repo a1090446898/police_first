@@ -49,11 +49,11 @@ INSTALLED_APPS = [
     'DjangoUeditor',
     'work',
     'news',
-    'communication',
     'operation',
     'resources',
     'custom',
     'pure_pagination',
+    'conversation',
 
 ]
 

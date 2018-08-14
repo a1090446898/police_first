@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block urls %}
-     <a href="{% url 'communication:study_garden_detail' list.id %}?option={{ option }}">
+     <a href="{% url 'conversation:study_garden_detail' list.id %}?option={{ option }}">
          {{ list.title }}
      </a>
 {% endblock %}
