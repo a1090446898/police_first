@@ -19,10 +19,11 @@ class GlobalSettings(object):
 
 
 class SubmissionAdmin(object):
-    list_display = ['title', 'name', 'is_read', 'is_pass', 'phone', 'address', 'email', 'add_time']
-    search_fields = ['title', 'name', 'is_read', 'is_pass', 'phone', 'address', 'email']
-    list_filter = ['title', 'name', 'is_read', 'is_pass', 'phone', 'address', 'email', 'add_time']
-    # readonly_fields = ['title', 'name', 'phone', 'address', 'email', 'add_time', 'content']
+    list_display = ['title', 'name', 'phone', 'address', 'email', 'add_time', 'read_volume', 'is_read', 'is_pass']
+    search_fields = ['title', 'name', 'phone', 'address', 'email', 'read_volume', 'is_read', 'is_pass']
+    list_filter = ['title', 'name', 'phone', 'address', 'email', 'add_time', 'read_volume', 'is_read', 'is_pass']
+
+    readonly_fields = ['title', 'content', 'name', 'phone', 'address', 'email', 'add_time', 'read_volume']
 
     def queryset(self):
         qs = super(SubmissionAdmin, self).queryset()
@@ -31,10 +32,12 @@ class SubmissionAdmin(object):
 
 
 class SubmissionPassAdmin(object):
-    list_display = ['title', 'name', 'is_read', 'is_pass', 'phone', 'address', 'email', 'add_time']
-    search_fields = ['title', 'name', 'is_read', 'is_pass', 'phone', 'address', 'email']
-    list_filter = ['title', 'name', 'is_read', 'is_pass', 'phone', 'address', 'email', 'add_time']
-    # readonly_fields = ['title', 'name', 'phone', 'address', 'email', 'add_time', 'content']
+    list_display = ['title', 'name', 'phone', 'address', 'email', 'add_time', 'read_volume', 'is_read', 'is_pass']
+    search_fields = ['title', 'name', 'phone', 'address', 'email', 'read_volume', 'is_read', 'is_pass']
+    list_filter = ['title', 'name', 'phone', 'address', 'email', 'add_time', 'read_volume', 'is_read', 'is_pass']
+
+    readonly_fields = ['title', 'content', 'name', 'phone', 'address', 'email', 'add_time', 'read_volume']
+
 
     def queryset(self):
         qs = super(SubmissionPassAdmin, self).queryset()
@@ -43,11 +46,11 @@ class SubmissionPassAdmin(object):
 
 
 class SubmissionReadAdmin(object):
-    list_display = ['title', 'name', 'is_read', 'is_pass', 'phone', 'address', 'email', 'add_time', 'read_volume']
-    search_fields = ['title', 'name', 'is_read', 'is_pass', 'phone', 'address', 'email', 'read_volume']
-    list_filter = ['title', 'name', 'is_read', 'is_pass', 'phone', 'address', 'email', 'add_time', 'read_volume']
+    list_display = ['title', 'name', 'phone', 'address', 'email', 'add_time', 'read_volume', 'is_read', 'is_pass']
+    search_fields = ['title', 'name', 'phone', 'address', 'email', 'read_volume', 'is_read', 'is_pass']
+    list_filter = ['title', 'name', 'phone', 'address', 'email', 'add_time', 'read_volume', 'is_read', 'is_pass']
 
-    readonly_fields = ['title', 'name', 'phone', 'address', 'email', 'add_time', 'content', 'read_volume']
+    readonly_fields = ['title', 'content', 'name', 'phone', 'address', 'email', 'add_time', 'read_volume']
 
     def queryset(self):
         qs = super(SubmissionReadAdmin, self).queryset()
