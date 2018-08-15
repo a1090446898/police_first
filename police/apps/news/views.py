@@ -164,11 +164,23 @@ class NewsList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = News.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = News.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = News.objects.all().order_by('-read_volume')
+        # 投稿页
         else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = Submission.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = Submission.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -184,6 +196,7 @@ class NewsList(View):
             'name': '监管要闻',
             'lists': lists,
             'option': option,
+            'choice': choice,
 
         })
 
@@ -193,11 +206,15 @@ class TeamNewsList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = TeamNews.objects.all().order_by('-add_time')
-        else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = TeamNews.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = TeamNews.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -213,6 +230,7 @@ class TeamNewsList(View):
             'name': '支队动态',
             'lists': lists,
             'option': option,
+            'choice': choice,
 
         })
 
@@ -222,11 +240,15 @@ class PlacesNewsList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = PlacesNews.objects.all().order_by('-add_time')
-        else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = PlacesNews.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = PlacesNews.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -242,6 +264,7 @@ class PlacesNewsList(View):
             'name': '各地动态',
             'lists': lists,
             'option': option,
+            'choice': choice,
 
         })
 
@@ -251,11 +274,15 @@ class HelpNewsList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = HelpNews.objects.all().order_by('-add_time')
-        else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = HelpNews.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = HelpNews.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -271,6 +298,7 @@ class HelpNewsList(View):
             'name': '协助破案',
             'lists': lists,
             'option': option,
+            'choice': choice,
 
         })
 
@@ -280,11 +308,15 @@ class VideoPatrolList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = VideoPatrol.objects.all().order_by('-add_time')
-        else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = VideoPatrol.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = VideoPatrol.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -300,7 +332,7 @@ class VideoPatrolList(View):
             'name': '视频巡查',
             'lists': lists,
             'option': option,
-
+            'choice': choice,
         })
 
 
@@ -309,11 +341,15 @@ class BuildWorkList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = BuildWork.objects.all().order_by('-add_time')
-        else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = BuildWork.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = BuildWork.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -329,6 +365,7 @@ class BuildWorkList(View):
             'name': '党建工作',
             'lists': lists,
             'option': option,
+            'choice': choice,
 
         })
 
@@ -349,7 +386,8 @@ class NewsDetails(View):
             new_detail.save()
 
         return render(request, 'detail.html', {
-            'new_detail': new_detail
+            'name': '文章详情',
+            'new_detail': new_detail,
 
         })
 
@@ -364,13 +402,10 @@ class TeamNewsDetails(View):
             new_detail = TeamNews.objects.get(id=int(detail_id))
             new_detail.read_volume += 1
             new_detail.save()
-        else:
-            new_detail = Submission.objects.get(id=int(detail_id))
-            new_detail.read_volume += 1
-            new_detail.save()
 
         return render(request, 'detail.html', {
-            'new_detail': new_detail
+            'name': '文章详情',
+            'new_detail': new_detail,
 
         })
 
@@ -385,12 +420,9 @@ class PlacesNewsDetails(View):
             new_detail = PlacesNews.objects.get(id=int(detail_id))
             new_detail.read_volume += 1
             new_detail.save()
-        else:
-            new_detail = Submission.objects.get(id=int(detail_id))
-            new_detail.read_volume += 1
-            new_detail.save()
 
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail
 
         })
@@ -406,12 +438,9 @@ class HelpNewsDetails(View):
             new_detail = HelpNews.objects.get(id=int(detail_id))
             new_detail.read_volume += 1
             new_detail.save()
-        else:
-            new_detail = Submission.objects.get(id=int(detail_id))
-            new_detail.read_volume += 1
-            new_detail.save()
 
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail
 
         })
@@ -427,12 +456,9 @@ class VideoPatroDetails(View):
             new_detail = VideoPatrol.objects.get(id=int(detail_id))
             new_detail.read_volume += 1
             new_detail.save()
-        else:
-            new_detail = Submission.objects.get(id=int(detail_id))
-            new_detail.read_volume += 1
-            new_detail.save()
 
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail
 
         })
@@ -448,12 +474,9 @@ class BuildWorkDetails(View):
             new_detail = BuildWork.objects.get(id=int(detail_id))
             new_detail.read_volume += 1
             new_detail.save()
-        else:
-            new_detail = Submission.objects.get(id=int(detail_id))
-            new_detail.read_volume += 1
-            new_detail.save()
 
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail
 
         })

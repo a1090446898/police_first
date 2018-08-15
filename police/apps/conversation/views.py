@@ -13,9 +13,15 @@ class StudyGardenList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = StudyGarden.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = StudyGarden.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = StudyGarden.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -31,6 +37,7 @@ class StudyGardenList(View):
             'name': '学习园地',
             'lists': lists,
             'option': option,
+            'choice': choice,
         })
 
 
@@ -39,9 +46,15 @@ class CommunicationList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = Communication.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = Communication.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = Communication.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -57,6 +70,7 @@ class CommunicationList(View):
             'name': '经验交流',
             'lists': lists,
             'option': option,
+            'choice': choice,
         })
 
 
@@ -67,6 +81,7 @@ class CommunicationDetails(View):
         new_detail.read_volume += 1
         new_detail.save()
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail,
         })
 
@@ -78,5 +93,6 @@ class StudyGardenDetails(View):
         new_detail.read_volume += 1
         new_detail.save()
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail,
         })

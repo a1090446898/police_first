@@ -27,11 +27,15 @@ class AnnouncementList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = Announcement.objects.all().order_by('-add_time')
-        else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = Announcement.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = Announcement.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -43,10 +47,11 @@ class AnnouncementList(View):
 
         lists = p.page(page)
 
-        return render(request, 'list.html', {
+        return render(request, 'announcement_list.html', {
             'name': '通知通告',
             'lists': lists,
             'option': option,
+            'choice': choice,
 
         })
 
@@ -56,11 +61,15 @@ class WorkBulletinList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = WorkBulletin.objects.all().order_by('-add_time')
-        else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = WorkBulletin.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = WorkBulletin.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -76,6 +85,7 @@ class WorkBulletinList(View):
             'name': '工作简报',
             'lists': lists,
             'option': option,
+            'choice': choice,
 
         })
 
@@ -85,11 +95,15 @@ class NoticeList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = Notice.objects.all().order_by('-add_time')
-        else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = Notice.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = Notice.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -105,6 +119,7 @@ class NoticeList(View):
             'name': '公示公告',
             'lists': lists,
             'option': option,
+            'choice': choice,
 
         })
 
@@ -114,11 +129,15 @@ class TeamSystemList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = TeamSystem.objects.all().order_by('-add_time')
-        else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = TeamSystem.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = TeamSystem.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -134,6 +153,7 @@ class TeamSystemList(View):
             'name': '支队制度',
             'lists': lists,
             'option': option,
+            'choice': choice,
 
         })
 
@@ -143,11 +163,15 @@ class LawsList(View):
     def get(self, request):
         # 进行选项
         option = request.GET.get('option', '')
+        choice = request.GET.get('choice', '')
 
         if option == '1' or option == '':
-            lists = Laws.objects.all().order_by('-add_time')
-        else:
-            lists = Submission.objects.all().order_by('-add_time')
+            # 最新排序
+            if choice == '1' or choice == '':
+                lists = Laws.objects.all().order_by('-add_time')
+            # 最火排序
+            else:
+                lists = Laws.objects.all().order_by('-read_volume')
 
         # 进行分页
         try:
@@ -163,6 +187,7 @@ class LawsList(View):
             'name': '法律法规',
             'lists': lists,
             'option': option,
+            'choice': choice,
 
         })
 
@@ -177,12 +202,9 @@ class AnnouncementDetails(View):
             new_detail = Announcement.objects.get(id=int(detail_id))
             new_detail.read_volume += 1
             new_detail.save()
-        else:
-            new_detail = Submission.objects.get(id=int(detail_id))
-            new_detail.read_volume += 1
-            new_detail.save()
 
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail
 
         })
@@ -198,12 +220,9 @@ class WorkBulletinDetails(View):
             new_detail = WorkBulletin.objects.get(id=int(detail_id))
             new_detail.read_volume += 1
             new_detail.save()
-        else:
-            new_detail = Submission.objects.get(id=int(detail_id))
-            new_detail.read_volume += 1
-            new_detail.save()
 
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail
 
         })
@@ -219,12 +238,9 @@ class NoticeDetails(View):
             new_detail = Notice.objects.get(id=int(detail_id))
             new_detail.read_volume += 1
             new_detail.save()
-        else:
-            new_detail = Submission.objects.get(id=int(detail_id))
-            new_detail.read_volume += 1
-            new_detail.save()
 
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail
 
         })
@@ -240,12 +256,9 @@ class TeamSystemDetails(View):
             new_detail = TeamSystem.objects.get(id=int(detail_id))
             new_detail.read_volume += 1
             new_detail.save()
-        else:
-            new_detail = Submission.objects.get(id=int(detail_id))
-            new_detail.read_volume += 1
-            new_detail.save()
 
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail
         })
 
@@ -260,12 +273,9 @@ class LawsDetails(View):
             new_detail = Laws.objects.get(id=int(detail_id))
             new_detail.read_volume += 1
             new_detail.save()
-        else:
-            new_detail = Submission.objects.get(id=int(detail_id))
-            new_detail.read_volume += 1
-            new_detail.save()
 
         return render(request, 'detail.html', {
+            'name': '文章详情',
             'new_detail': new_detail
         })
 

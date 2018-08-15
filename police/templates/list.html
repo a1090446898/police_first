@@ -128,8 +128,6 @@
             font-weight: normal;
         }
 
-
-
         #divs ul li:hover {
             color: red;
         }
@@ -161,7 +159,6 @@
             <div class="tab_content">
                 <div class="tab_a">
                     <div class="tab_title">
-
                     </div>
                     <ul id="tab_t">
 
@@ -181,6 +178,16 @@
                 </div>
             <!--右边-->
                 <div id="divs">
+                    {% block choice %}
+                        <div class="choice">
+                            <a href="?choice=1&option={{ option }}" {% if choice == '' or choice == '1' %}class="choice_active"{% endif %}>
+                                <span>最新</span>
+                            </a>
+                            <a href="?choice=2&option={{ option }}" {% if choice == '2'%}class="choice_active"{% endif %}>
+                                <span>最火</span>
+                            </a>
+                        </div>
+                    {% endblock %}
                     <div class="show">
                         {% for list in lists.object_list %}
                             <div class="show_item">
@@ -198,7 +205,7 @@
                                 </div>
 
                             </div>
-                                {% endfor %}
+                        {% endfor %}
                     </div>
                 <!--页码-->
                     <div class="box">

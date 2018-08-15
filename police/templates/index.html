@@ -35,6 +35,10 @@
                 <!--头部背景-->
                 <div class="head_div">
                     <img class="head_img" src="{% if logo %}{{ MEDIA_URL }}{{ window.image }} {% else %} {% static 'img/TIM图片20180725135143.png' %} {% endif %}">
+{#                    <MARQUEE onmouseover=stop() onmouseout=start() scrollAmount=3 loop=infinite deplay="0">#}
+{#                        <img src="{% static 'img/TIM图片20180725135143.png' %}">#}
+{#                        <img src="{% static 'img/TIM图片20180725165456.png' %}">#}
+{#                    </MARQUEE>#}
                 </div>
                 <!--导航-->
                 <div class="navigation">
@@ -108,7 +112,6 @@
                             <div class="journalism">
                                 <div class="journalism_img">
                                     <img src="{% static 'img/imgText.png' %}"/>
-
                                 </div>
                                 <span>图片新闻</span>
                             </div>
@@ -117,7 +120,9 @@
                                 <!--文字溢出自己隐藏-->
                                 <div id="banner_list">
                                      {% for banners in all_News_banner %}
-                                        <a href="{% url 'news:news_detail' banners.id %}" target="_blank"><img src="{{ MEDIA_URL }}{{ banners.image }}" title="{{ banners.title }}" alt="{{ banners.title }}" /></a>
+                                        <a href="{% url 'news:news_detail' banners.id %}" target="_blank">
+                                            <img src="{{ MEDIA_URL }}{{ banners.image }}" title="{{ banners.title }}" alt="{{ banners.title }}" />
+                                        </a>
                                      {% endfor %}
                                 </div>
                                 <div id="banner_bg"></div>
