@@ -9,14 +9,17 @@
             <link rel="stylesheet" href="{% static 'css/index.css' %}" />
             <link rel="stylesheet" href="{% static 'css/head.css' %}">
             <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+            <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}" />
         {% endblock %}
         {% block js_index %}
-		<script type="text/javascript" src="{% static 'js/jquery-2.1.0.js' %}"></script>
-		<!--农历-->
-		<script type="text/javascript" src="{% static 'js/getCNDate.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/jquery-2.1.0.js' %}"></script>
+            <!--农历-->
+            <script type="text/javascript" src="{% static 'js/getCNDate.js' %}"></script>
+            <!-- 头部轮播插件 -->
+            <script type="text/javascript" src="{% static 'js/swiper.min.js' %}"></script>
         {% endblock %}
         {% block style_index %}
-        <style>
+            <style>
             .block a{
 	            text-decoration: none;
 	            color: #333333;
@@ -29,16 +32,25 @@
 	</head>
 
 	<body>
-
         <div style="background: linear-gradient(#ABDBF1, #FFFFFF);">
             <div class="all_head">
                 <!--头部背景-->
                 <div class="head_div">
-                    <img class="head_img" src="{% if logo %}{{ MEDIA_URL }}{{ window.image }} {% else %} {% static 'img/TIM图片20180725135143.png' %} {% endif %}">
-{#                    <MARQUEE onmouseover=stop() onmouseout=start() scrollAmount=3 loop=infinite deplay="0">#}
-{#                        <img src="{% static 'img/TIM图片20180725135143.png' %}">#}
-{#                        <img src="{% static 'img/TIM图片20180725165456.png' %}">#}
-{#                    </MARQUEE>#}
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            {% if logos %}
+                                {% for logo in logos %}
+                                  <div class="swiper-slide">
+                                      <img src="{{ MEDIA_URL }}{{ logo.image }}" height="250px" width="100%">
+                                  </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="swiper-slide">
+                                 <img src="{% static 'img/logo.png' %}" height="250px" width="100%">
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
                 <!--导航-->
                 <div class="navigation">
@@ -499,14 +511,15 @@
 		})
 
 		function showAuto()
-
 		{
-
 			n = n >= (count - 1) ? 0 : ++n;
 
 			$("#banner li").eq(n).trigger('click');
-
 		}
+		// 头部轮番
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: true, //可选选项，自动滑动
+        })
 	</script>
 
 </html>

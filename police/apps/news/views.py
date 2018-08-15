@@ -97,10 +97,7 @@ class IndexView(View):
         resources = Resources.objects.all().order_by('-add_time')
         # Logo
         logos = LogoImage.objects.all().order_by('-add_time')
-        if logos:
-            logo = logos[0]
-        else:
-            logo = []
+
         # 飘窗
         windows = MovieWindow.objects.all().order_by('-add_time')
         if windows:
@@ -149,7 +146,7 @@ class IndexView(View):
             'source_nums': source_nums,
             'all_nums': all_nums,
             'click': click,
-            'logo': logo,
+            'logos': logos,
             'window': window,
             'duty': duty_man,
             'time': now_time,
