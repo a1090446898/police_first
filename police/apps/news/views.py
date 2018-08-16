@@ -63,7 +63,7 @@ class IndexView(View):
         click = clicks.index_click
 
         # 监管要闻
-        news = News.objects.all().order_by('-add_time')[:6]
+        news = News.objects.filter(is_banner=False).order_by('-add_time')[:5]
         if news:
             title_new = news[0]
             title_new_id = title_new.id

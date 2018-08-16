@@ -188,7 +188,7 @@
 }
 
 .focusnews_a p:nth-of-type(1) {
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .focusnews_a p {
@@ -248,8 +248,8 @@
 /*左边样式*/
 
 .broadcast {
-	width: 35.4%;
-	/*width: 63%;*/
+	/*width: 35.4%;*/
+	width: 59.5%;
 	min-height: 300px;
 	float: left;
 	border: 1px solid #e5e9ed;
@@ -284,13 +284,13 @@
 }
 
 .focusnews {
-	width: 63%;
-	/*width: 35.4%;*/
+	/*width: 63%;*/
+	width: 39.2%;
 	min-height: 300px;
 	float: right;
 	border: 1px solid #e5e9ed;
 	background-color: white;
-	margin-left: 10px;
+	/*margin-left: 10px;*/
 	font-size: 15px;
 }
 
@@ -522,16 +522,22 @@
 
 #banner {
 	position: relative;
-	width: 305px;
+	width: 98%;
 	height: 240px;
 	margin-left: 6px;
 }
 
-#banner_list img {
-	border: 0px;
+#banner_list{
 	width: 100%;
-	height: 240px;
+	height: 100%;
 }
+
+
+/*#banner_list a img{*/
+	/*border: 0px;*/
+	/*width: 100%;*/
+	/*height: 240px;*/
+/*}*/
 
 #banner_bg {
 	position: absolute;
@@ -548,8 +554,7 @@
 #banner_info {
 	position: absolute;
 	bottom: -25px;
-	left: 60px;
-	width: 200px;
+	width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
