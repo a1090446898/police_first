@@ -156,6 +156,7 @@
 	background-size: 100% 100%;
 }
 
+
 .block_b span:nth-of-type(1) {
 	font-weight: bold;
 	font-size: 16px;
@@ -304,18 +305,22 @@
 }
 
 .notified {
+	display: flex;
+	flex-direction: column;
 	width: 49.5%;
 	min-height: 250px;
 	float: left;
 	border: 1px solid #e5e9ed;
 	background-color: white;
 	margin-top: 5px;
-	font-size: 12px;
+	font-size: 15px;
 }
+
 
 .notified ul li {
 	list-style-type: none;
-	margin-bottom: 15px;
+	/*margin-bottom: 15px;*/
+
 }
 
 .notified ul li:hover {
@@ -323,7 +328,11 @@
 }
 
 .notified ul {
-	padding: 10px 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 220px;
+	padding: 0px 10px;
 }
 
 .notified a {

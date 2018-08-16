@@ -176,7 +176,10 @@
                                 {% for announcement in all_announcements %}
                                     <a href="{% url 'work:announcement_detail' announcement.id %}">
                                     <li>
-                                        <div class="pictureimg"></div><span>[{{ announcement.source.name|truncatewords:"3" }}]</span>{{ announcement.title|truncatewords:"20" }}<span class="a">[{{ announcement.add_time|date:'Y-m-d' }}]</span>
+                                        <div class="pictureimg"></div>
+                                        <span>[{{ announcement.source.name|truncatewords:"3" }}]</span>
+                                        {{ announcement.title|truncatewords:"20" }}
+                                        <span class="a">[{{ announcement.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
                                 {% endfor %}
