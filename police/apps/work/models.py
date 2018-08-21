@@ -21,8 +21,8 @@ class Source(models.Model):
 
 class Notice(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='notice/ueditor',
-                           filePath='notice/ueditor', default='')
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='notice/images/%(basename)s_%(datetime)s.%(extname)s',
+                           filePath='notice/images/%(basename)s_%(datetime)s.%(extname)s', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
@@ -37,8 +37,8 @@ class Notice(models.Model):
 
 class Announcement(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='announcement/ueditor',
-                           filePath='announcement/ueditor', default='')
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='announcement/images/%(basename)s_%(datetime)s.%(extname)s',
+                           filePath='announcement/images/%(basename)s_%(datetime)s.%(extname)s', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
@@ -53,8 +53,8 @@ class Announcement(models.Model):
 
 class WorkBulletin(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='work_bulletin/ueditor',
-                           filePath='work_bulletin/ueditor', default='')
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='work_bulletin/images/%(basename)s_%(datetime)s.%(extname)s',
+                           filePath='work_bulletin/images/%(basename)s_%(datetime)s.%(extname)s', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
@@ -69,8 +69,8 @@ class WorkBulletin(models.Model):
 
 class TeamSystem(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='team_system/ueditor',
-                           filePath='team_system/ueditor', default='')
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='team_system/images/%(basename)s_%(datetime)s.%(extname)s',
+                           filePath='team_system/images/%(basename)s_%(datetime)s.%(extname)s', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
@@ -85,8 +85,8 @@ class TeamSystem(models.Model):
 
 class Laws(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='laws/ueditor',
-                           filePath='laws/ueditor', default='')
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='laws/images/%(basename)s_%(datetime)s.%(extname)s',
+                           filePath='laws/images/%(basename)s_%(datetime)s.%(extname)s', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
