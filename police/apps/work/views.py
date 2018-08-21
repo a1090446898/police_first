@@ -6,25 +6,17 @@ from itertools import chain
 from news.models import News
 from operation.models import Submission
 from apps.work.models import *
+from custom.models import LogoImage
 
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
+
 # Create your views here.
-
-
-class IndexView(View):
-    def get(self, request):
-        news = News.objects.all()
-        submissions = Submission.objects.filter(is_pass=True)
-        return render(request, 'index.html', {
-            'Notices': news
-
-        })
-
-
 # 通知通告列表页
 class AnnouncementList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -43,7 +35,7 @@ class AnnouncementList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -52,6 +44,7 @@ class AnnouncementList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
+            'logos': logos,
 
         })
 
@@ -59,6 +52,8 @@ class AnnouncementList(View):
 # 工作简报列表页
 class WorkBulletinList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -77,7 +72,7 @@ class WorkBulletinList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -86,13 +81,15 @@ class WorkBulletinList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
-
+            'logos': logos,
         })
 
 
 # 公示公告列表页
 class NoticeList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -111,7 +108,7 @@ class NoticeList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -120,13 +117,15 @@ class NoticeList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
-
+            'logos': logos,
         })
 
 
 # 支队制度列表页
 class TeamSystemList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -145,7 +144,7 @@ class TeamSystemList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -154,13 +153,15 @@ class TeamSystemList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
-
+            'logos': logos,
         })
 
 
 # 法律法规列表页
 class LawsList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -179,7 +180,7 @@ class LawsList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -188,7 +189,7 @@ class LawsList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
-
+            'logos': logos,
         })
 
 

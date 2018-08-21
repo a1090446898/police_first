@@ -159,6 +159,8 @@ class IndexView(View):
 # 新闻列表页
 class NewsList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -185,7 +187,7 @@ class NewsList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -194,6 +196,7 @@ class NewsList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
+            'logos': logos,
 
         })
 
@@ -201,6 +204,8 @@ class NewsList(View):
 # 支队动态列表页
 class TeamNewsList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -219,7 +224,7 @@ class TeamNewsList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -228,6 +233,7 @@ class TeamNewsList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
+            'logos': logos,
 
         })
 
@@ -235,6 +241,8 @@ class TeamNewsList(View):
 # 各地动态列表页
 class PlacesNewsList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -253,7 +261,7 @@ class PlacesNewsList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -262,6 +270,7 @@ class PlacesNewsList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
+            'logos': logos,
 
         })
 
@@ -269,6 +278,8 @@ class PlacesNewsList(View):
 # 协助破案列表页
 class HelpNewsList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -287,7 +298,7 @@ class HelpNewsList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -296,6 +307,7 @@ class HelpNewsList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
+            'logos': logos,
 
         })
 
@@ -303,6 +315,8 @@ class HelpNewsList(View):
 # 视频巡查列表页
 class VideoPatrolList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -321,7 +335,7 @@ class VideoPatrolList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -330,12 +344,15 @@ class VideoPatrolList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
+            'logos': logos,
         })
 
 
 # 党建工作列表页
 class BuildWorkList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -354,7 +371,7 @@ class BuildWorkList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -363,6 +380,7 @@ class BuildWorkList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
+            'logos': logos,
 
         })
 

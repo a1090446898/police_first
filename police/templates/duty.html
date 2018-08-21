@@ -31,6 +31,7 @@
         <table width="100%" border="0">
             <tr align="center">
                 <td>时间</td>
+                <td>支队</td>
                 <td>领导</td>
                 <td>手机</td>
                 <td>值班民警</td>
@@ -40,6 +41,7 @@
             {% for week in Weeks %}
                 <tr align="center">
                     <td>{{ week.get_week_display}}</td>
+                    <td>{{ week.detachment }}</td>
                     <td>{{ week.leader_name }}</td>
                     <td>{{ week.leader_phone }}</td>
                     <td>{{ week.follower }}</td>

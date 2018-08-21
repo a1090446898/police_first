@@ -1,22 +1,12 @@
 {% extends 'index.html' %}
 {% load staticfiles %}
 
-{% block js_index %}
-    <script type="text/javascript" src="{% static 'js/jquery-2.1.0.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.pagination.min.js' %}"></script>
-{% endblock %}
+{% block js_index %}{% endblock %}
 {% block css_index %}
-    <link rel="stylesheet" href="{% static 'css/jquery.pagination.css' %}" />
     <link rel="stylesheet" href="{% static 'css/list.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/head.css' %}">
 {% endblock %}
 {% block style_index %}
     <style>
-
-        .hide {
-            display: none;
-        }
         .box button {
             display: inline-block;
             padding: 6px 12px;
@@ -31,22 +21,6 @@
             color: #fff;
             background-color: #5bc0de;
             margin: 20px 20px 0 0;
-        }
-
-
-
-        .page {
-            width: 700px;
-        }
-
-        .info {
-            width: 200px;
-            height: 34px;
-            line-height: 70px;
-        }
-
-        .fl {
-            float: left;
         }
 
         .box ul li {
@@ -95,7 +69,6 @@
         .tab_a ul li {
             width: 100%;
             height: 50px;
-            border: 1px solid ghostwhite;
             line-height: 50px;
             cursor: pointer;
             list-style-type: none;
@@ -104,7 +77,6 @@
             text-decoration:none;
             color: rgb(57, 57, 57);
         }
-
 
         #divs {
             display: flex;
@@ -131,12 +103,6 @@
         #divs ul li:hover {
             color: red;
         }
-
-        .purple {
-            background-color: ghostwhite;
-            font-weight: bold;
-            color: #397CD1;
-        }
     </style>
 {% endblock %}
 
@@ -149,11 +115,9 @@
             <div class="signin">
                 <div class="user_name">
                     当前页面：{{ name }}
-                    {% block head_titl %}
-                    {% endblock %}
+                    {% block head_titl %}{% endblock %}
                 </div>
             </div>
-
             <!--中间部分-->
             {% block  mid_content%}
             <div class="tab_content">
@@ -207,7 +171,7 @@
                             </div>
                         {% endfor %}
                     </div>
-                <!--页码-->
+                    <!--页码-->
                     <div class="box">
                         <ul class="box_ul">
                             {% if lists.has_previous %}
@@ -228,7 +192,6 @@
                                 <li class="box_li_long"><a href="?{{ lists.next_page_number.querystring }}">下一页</a></li>
                             {% endif %}
                         </ul>
-
                     </div>
                 </div>
             </div>
@@ -241,5 +204,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block window_script %}
+    img.hidden = true;
 {% endblock %}
 

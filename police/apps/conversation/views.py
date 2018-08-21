@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.base import View
 
 from .models import Communication, StudyGarden
-
+from custom.models import LogoImage
 from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
@@ -11,6 +11,8 @@ from pure_pagination import Paginator, EmptyPage, PageNotAnInteger
 # 学习园地列表
 class StudyGardenList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -29,7 +31,7 @@ class StudyGardenList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -38,12 +40,15 @@ class StudyGardenList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
+            'logos': logos,
         })
 
 
 # 经验交流列表
 class CommunicationList(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         # 进行选项
         option = request.GET.get('option', '')
         choice = request.GET.get('choice', '')
@@ -62,7 +67,7 @@ class CommunicationList(View):
         except PageNotAnInteger:
             page = 1
 
-        p = Paginator(lists, 10, request=request)
+        p = Paginator(lists, 9, request=request)
 
         lists = p.page(page)
 
@@ -71,6 +76,7 @@ class CommunicationList(View):
             'lists': lists,
             'option': option,
             'choice': choice,
+            'logos': logos,
         })
 
 

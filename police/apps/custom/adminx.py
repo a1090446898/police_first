@@ -10,9 +10,9 @@ class LogoImageAdmin(object):
 
 
 class MovieWindowAdmin(object):
-    list_display = ['title', 'image', 'add_time']
+    list_display = ['title', 'image', 'is_window', 'add_time']
     search_fields = ['title', 'is_window', 'image']
-    list_filter = ['title', 'image', 'add_time']
+    list_filter = ['title', 'image', 'is_window', 'add_time']
 
 
 class OtherConnectionsAdmin(object):
@@ -23,17 +23,17 @@ class OtherConnectionsAdmin(object):
 
 class DutyAdmin(object):
     list_display = [
-        'week', 'leader_name', 'leader_phone', 'follower', 'telephone', 'follower_phone',
+        'week', 'detachment', 'leader_name', 'leader_phone', 'follower', 'telephone', 'follower_phone',
         'add_time'
     ]
 
     search_fields = [
-        'week', 'leader_name', 'leader_phone', 'follower', 'telephone', 'follower_phone'
+        'week', 'detachment', 'leader_name', 'leader_phone', 'follower', 'telephone', 'follower_phone'
 
     ]
 
     list_filter = [
-        'week', 'leader_name', 'leader_phone', 'follower', 'telephone', 'follower_phone',
+        'week', 'detachment', 'leader_name', 'leader_phone', 'follower', 'telephone', 'follower_phone',
         'add_time'
     ]
 

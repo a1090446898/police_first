@@ -8,20 +8,19 @@ from django.shortcuts import redirect
 
 from .forms import SubmissionAskForm
 from .models import Submission
+from custom.models import LogoImage
 
 
 class SubmissionAsk(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         return render(request, 'submission.html', {
+            'name': '用户投稿',
+            'logos': logos,
         })
 
     def post(self, request):
-        title = ''
-        content = ''
-        name = ''
-        phone = ''
-        address = ''
-        email = ''
         error = ''
 
         submission_form = SubmissionAskForm(request.POST)
@@ -38,7 +37,6 @@ class SubmissionAsk(View):
             error = submission_form.errors
 
         return render(request, 'submission.html', {
-            'name': '用户投稿',
             'title': title,
             'content': content,
             'sub_name': name,
@@ -46,11 +44,15 @@ class SubmissionAsk(View):
             'address': address,
             'email': email,
             'error': error,
+            'name': '用户投稿',
         })
 
 
 class SuccessView(View):
     def get(self, request):
+        # Logo
+        logos = LogoImage.objects.all().order_by('-add_time')
         return render(request, 'success.html', {
-            'name': '投稿成功'
+            'name': '投稿成功',
+            'logos': logos,
         })

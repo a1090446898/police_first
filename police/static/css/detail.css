@@ -1,5 +1,6 @@
 .detail_article{
-    margin: 10px 0;
+    margin: 10px 0 400px;
+
     /*padding: 0 30px;*/
 }
 
@@ -21,7 +22,7 @@
     color: #777777;
     border-top: 3px solid #069be5;
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 16px;
     padding: 15px 0;
 }
 
@@ -31,10 +32,10 @@
 
 .detail_content{
     margin-top: 35px;
-    font-size: 14px;
+    font-size: 22px;
     color: #333333;
     font-family: "Microsoft Yahei","Hiragino Sans GB","Helvetica Neue",Helvetica,tahoma,arial,Verdana,sans-serif,"WenQuanYi Micro Hei","\5B8B\4F53";
     -webkit-font-smoothing: antialiased;
     min-height: 800px;
-
+    padding: 0px 50px;
 }

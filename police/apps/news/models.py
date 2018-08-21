@@ -25,7 +25,7 @@ class News(models.Model):
     image = models.ImageField(upload_to='banner/%Y/%m', verbose_name='轮播图',
                               max_length=100, default='', null=True, blank=True)
     is_banner = models.BooleanField(default=False, verbose_name='是否轮播')
-    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='news/ueditor',
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='news/ueditor',
                            filePath='news/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
@@ -48,7 +48,7 @@ class BannerNews(News):
 
 class TeamNews(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='teamNews/ueditor',
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='teamNews/ueditor',
                            filePath='teamNews/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
@@ -64,7 +64,7 @@ class TeamNews(models.Model):
 
 class PlacesNews(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='placesNews/ueditor',
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='placesNews/ueditor',
                            filePath='placesNews/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
@@ -80,7 +80,7 @@ class PlacesNews(models.Model):
 
 class HelpNews(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='helpNews/ueditor',
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='helpNews/ueditor',
                            filePath='helpNews/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
@@ -96,7 +96,7 @@ class HelpNews(models.Model):
 
 class VideoPatrol(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='videoPatrol/ueditor',
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='videoPatrol/ueditor',
                            filePath='videoPatrol/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')
@@ -112,7 +112,7 @@ class VideoPatrol(models.Model):
 
 class BuildWork(models.Model):
     title = models.CharField(max_length=50, verbose_name='标题')
-    content = UEditorField(verbose_name='内容', width=600, height=300, imagePath='buildWork/ueditor',
+    content = UEditorField(verbose_name='内容', width=1100, height=600, imagePath='buildWork/ueditor',
                            filePath='buildWork/ueditor', default='')
     source = models.ForeignKey(Source, verbose_name='文章来源')
     read_volume = models.IntegerField(default=0, verbose_name='阅读量')

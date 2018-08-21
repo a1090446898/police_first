@@ -21,8 +21,6 @@ from django.conf.urls.static import static
 from apscheduler.schedulers.background import BackgroundScheduler
 
 import xadmin
-
-
 from news.views import IndexView
 from custom.views import IntroduceView
 

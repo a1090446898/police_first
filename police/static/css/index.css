@@ -16,54 +16,41 @@
 	box-sizing: border-box;
 }
 
-.signin {
+.signin{
+	display: flex;
+	align-items: center;
 	width: 100%;
 	height: 40px;
-	background-color: #EFF9FB;
-	border: 1px solid gainsboro;
-	line-height: 40px;
-	margin-top: 2px;
-	/*padding: 0 10px;*/
+	background-color: #EFF6FF;
 }
 
-.user_imgs {
-	width: 20px;
-	height: auto;
-	float: left;
-	line-height: 50px;
-	margin-right: 10px;
-}
-
-.user_imgs img {
-	width: 20px;
-	height: 20px;
-}
-
-.user_name {
-	width: 60px;
-	height: auto;
-	float: left;
-	color: #1B509F;
+.user_login {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 10px;
+	height: 30px;
+	width: 85px;
+	/*background: #2f87d0;*/
+	background: #EFF9FB;
+	text-decoration: none;
+	color: #888888;
 	font-size: 14px;
 }
 
-.username {
-	float: left;
-	margin-right: 10px;
+.user_login:hover{
+	background: #2f87d0;
+	color: #FFFFFF;
 	font-size: 14px;
 }
 
-.username input {
-	width: 80px;
-}
-
-.password {
-	float: left;
-	font-size: 14px;
-}
-
-.password input {
-	width: 80px;
+.time_content{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	color: #888888;
+	margin-left: 750px;
 }
 
 .but {
@@ -78,21 +65,11 @@
 }
 
 .time {
-	min-width: 200px;
-	float: right;
-	margin-left: 10px;
-	height: 40px;
 	font-size: 14px;
-	line-height: 42px;
 }
 
 .lunarcalendar {
-	min-width: 100px;
-	float: right;
-	margin-left: 5px;
-	height: 40px;
 	font-size: 14px;
-	line-height: 42px;
 }
 
 .qr_imgs {
@@ -106,10 +83,9 @@
 .headphoto {
 	width: 100%;
 	height: 100px;
-	background-image: url(../img/v1.jpg);
 	background-size: 100% 100%;
-	margin-bottom: 5px;
-	margin-top: 5px;
+	/*margin-bottom: 5px;*/
+	/*margin-top: 5px;*/
 }
 
 
@@ -210,7 +186,7 @@
 
 .focusnews_b a {
 	text-decoration: none;
-	color: black;
+	color: #172c45;
 	font-size: 14px;
 }
 
@@ -313,7 +289,7 @@
 	border: 1px solid #e5e9ed;
 	background-color: white;
 	margin-top: 5px;
-	font-size: 15px;
+	font-size: 14px;
 }
 
 
@@ -337,12 +313,12 @@
 
 .notified a {
 	text-decoration: none;
-	color: black;
+	color: #172c45;
 }
 
 .briefing a {
 	text-decoration: none;
-	color: black;
+	color: #172c45;
 }
 
 .briefing ul li {
@@ -364,7 +340,6 @@
 .pictureimg {
 	width: 20px;
 	height: 15px;
-	background-image: url(../img/v8.jpg);
 	background-size: 100% 100%;
 	float: left;
 	margin-right: 5px;
@@ -379,12 +354,12 @@
 	border: 1px solid #e5e9ed;
 	background-color: white;
 	margin-top: 5px;
-	font-size: 15px;
+	font-size: 14px;
 }
 
 .a {
 	float: right;
-	color: #6C6C6C;
+	color: #888888;
 }
 
 .map {
@@ -392,12 +367,36 @@
 	width: 100%;
 	height: 110px;
 	margin-top: 5px;
-	background-image: url(../img/v2.jpg);
 	background-size: 100% 100%;
 }
 
 
 /*右边样式*/
+
+.more_duty{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 45px;
+
+}
+
+.more_duty a{
+	text-align: center;
+	line-height: 35px;
+	text-decoration: none;
+	color: #888888;
+	width: 90px;
+	height: 35px;
+	font-size: 14px;
+}
+
+.more_duty a:hover{
+	background: #2f87d0;
+	color: #FFFFFF;
+	font-size: 14px;
+}
 
 .Beonduty {
 	width: 98%;
@@ -426,16 +425,14 @@
 }
 .column p {
 	font-size: 14px;
-	margin-top: 10px;
+	margin-top: 15px;
 	margin-left: 10px;
-	margin-bottom: 10px;
 	cursor: pointer;
 }
 .column-a p {
 	font-size: 14px;
-	margin-top: 10px;
+	margin-top: 15px;
 	margin-left: 10px;
-	margin-bottom: 10px;
 	cursor: pointer;
 }
 
@@ -454,6 +451,7 @@
 	list-style-type: none;
 	font-size: 14px;
 	margin-left: 10px;
+	margin-top: 10px;
 	cursor: pointer;
 }
 .column ul li:hover {
@@ -508,16 +506,18 @@
 /*页尾*/
 
 .footer {
-	margin-top: 10px;
+	margin-top: 15px;
 	width: 100%;
-	height: 100px;
-	border: 1px solid gainsboro;
-	float: left;
-	border-bottom-left-radius: 25px;
+	min-height: 100px;
 	margin-bottom: 10px;
-	border-bottom-right-radius: 25px;
-	background: linear-gradient(#FCFBF6, #B1DBFF);
+	float: left;
+	background: white;
 	text-align: center;
+}
+
+.word{
+	margin-top: 10px;
+	color: gray;
 }
 
 
