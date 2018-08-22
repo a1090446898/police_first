@@ -119,8 +119,6 @@ class IndexView(View):
 
         # 各所链接
         other_urls = OtherConnections.objects.all().order_by('-add_time')
-        if other_urls:
-            other_urls = []
 
         # 签收文章数量统计：
         inspect_success = Submission.objects.filter(is_pass=True).count()

@@ -84,7 +84,6 @@
 
                         <li>信息化建设</li>
                         <li>网站导航</li>
-                        <li>最新发布</li>
                         <li>旧版入口</li>
 
                         <a href="{% url 'operation:formAsk' %}">
@@ -127,7 +126,17 @@
                                 <div id="banner_list">
                                      {% for banners in all_News_banner %}
                                         <a href="{% url 'news:news_detail' banners.id %}" target="_blank" style="width: 100%;height: 240px;">
-                                            <img src="{{ MEDIA_URL }}{{ banners.image }}" title="{{ banners.title }}" alt="{{ banners.title }}" style="width: 100%;height: 240px;border: 0px"/>
+                                            <img src="{{ MEDIA_URL }}{{ banners.image }}"
+                                                 title="{% if banners.title|length >= 20 %}
+                                                        {{ banners.title|slice:"20" }}...
+                                                        {% else %}
+                                                        {{ banners.title }}
+                                                        {% endif %}"
+                                                 alt="{% if banners.title|length >= 20 %}
+                                                        {{ banners.title|slice:"20" }}...
+                                                        {% else %}
+                                                        {{ banners.title }}
+                                                        {% endif %}" style="width: 100%;height: 240px;border: 0px"/>
                                         </a>
                                      {% endfor %}
                                 </div>
@@ -146,7 +155,15 @@
                         <div class="focusnews">
                             <div class="block">监管要闻 <a class="block_span" href="{% url 'news:news_list' %}">更多>></a></div>
                             <div class="focusnews_a">
-                                <a href="{% url 'news:news_detail' new_title_id %}" style="text-decoration:none" target="_blank"><p style="color:red" align="center">{{ title_new.title }}</p></a>
+                                <a href="{% url 'news:news_detail' new_title_id %}" style="text-decoration:none" target="_blank">
+                                    <p style="color:red" align="center">
+                                            {% if title_new.title|length >= 10 %}
+                                                {{ title_new.title|slice:"10" }}...
+                                                {% else %}
+                                                {{ title_new.title }}
+                                            {% endif %}
+                                    </p>
+                                </a>
                                 <p style="color: #1790D1">{{ title_new.introduce }}</p>
                             </div>
                             <div class="focusnews_b">
@@ -155,7 +172,7 @@
                                         {% if forloop.counter0 >= 1 %}
                                             <li>
                                                 <span class="spot"></span>
-                                                <a href="{% url 'news:news_detail' new.id %}" target="_blank">{{ new.title|truncatewords:"30"}}<span class="a">[{{ new.add_time|date:'Y-m-d' }}]</span></a>
+                                                <a href="{% url 'news:news_detail' new.id %}" target="_blank">{{ new.title|truncatewords:"20"}}<span class="a">[{{ new.add_time|date:'Y-m-d' }}]</span></a>
                                             </li>
                                         {% endif %}
                                     {% endfor %}
@@ -171,8 +188,20 @@
                                     <a href="{% url 'work:announcement_detail' announcement.id %}">
                                     <li>
                                         <img class="pictureimg" src="{% static 'img/detail_img.png' %}">
-                                        <span>[{{ announcement.source.name|truncatewords:"3" }}]</span>
-                                        {{ announcement.title|truncatewords:"20" }}
+                                        <span>
+                                            [
+                                            {% if announcement.source.name|length >= 3 %}
+                                                {{ announcement.source.name|slice:"3" }}...
+                                                {% else %}
+                                                {{ announcement.source.name}}
+                                            {% endif %}
+                                            ]
+                                        </span>
+                                            {% if announcement.title|length >= 17 %}
+                                                {{ announcement.title|slice:"17" }}...
+                                                {% else %}
+                                                {{ announcement.title }}
+                                            {% endif %}
                                         <span class="a">[{{ announcement.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
@@ -187,8 +216,20 @@
                                     <a href="{% url 'work:work_bulletin_detail' work_bulletin.id %}">
                                     <li>
                                         <img class="pictureimg" src="{% static 'img/detail_img.png' %}">
-                                        <span>[{{ work_bulletin.source.name|truncatewords:"3" }}]</span>
-                                        {{ work_bulletin.title|truncatewords:"20" }}
+                                        <span>
+                                            [
+                                            {% if work_bulletin.source.name|length >= 3 %}
+                                                {{ work_bulletin.source.name|slice:"3" }}...
+                                                {% else %}
+                                                {{ work_bulletin.source.name}}
+                                            {% endif %}
+                                            ]
+                                        </span>
+                                            {% if work_bulletin.title|length >= 17 %}
+                                                {{ work_bulletin.title|slice:"17" }}...
+                                                {% else %}
+                                                {{ work_bulletin.title }}
+                                            {% endif %}
                                         <span class="a">[{{ work_bulletin.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
@@ -204,7 +245,22 @@
                                 {% for notice in all_notices %}
                                     <a href={% url 'work:notice_detail' notice.id %}>
                                     <li>
-                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}"><span>[{{ notice.source.name|truncatewords:"3" }}]</span>{{ notice.title|truncatewords:"20" }}<span class="a">[{{ notice.add_time|date:'Y-m-d' }}]</span>
+                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}">
+                                        <span>
+                                            [
+                                            {% if notice.source.name|length >= 3 %}
+                                                {{ notice.source.name|slice:"3" }}...
+                                                {% else %}
+                                                {{ notice.source.name}}
+                                            {% endif %}
+                                            ]
+                                        </span>
+                                            {% if notice.title|length >= 17 %}
+                                                {{ notice.title|slice:"17" }}...
+                                                {% else %}
+                                                {{ notice.title }}
+                                            {% endif %}
+                                        <span class="a">[{{ notice.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
                                 {% endfor %}
@@ -217,7 +273,23 @@
                                 {% for team_system in all_team_systems %}
                                     <a href={% url 'work:team_system_detail' team_system.id %}>
                                     <li>
-                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}"><span>[{{ team_system.source.name|truncatewords:"3" }}]</span>{{ team_system.title|truncatewords:"20" }}<span class="a">[{{ team_system.add_time|date:'Y-m-d' }}]</span>
+                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}">
+                                        <span>
+                                            [
+                                            {% if team_system.source.name|length >= 3 %}
+                                                {{ team_system.source.name|slice:"3" }}...
+                                                {% else %}
+                                                {{ team_system.source.name}}
+                                            {% endif %}
+                                            ]
+                                        </span>
+                                            {% if team_system.title|length >= 17 %}
+                                                {{ team_system.title|slice:"17" }}...
+                                                {% else %}
+                                                {{ team_system.title }}
+                                            {% endif %}
+
+                                        <span class="a">[{{ team_system.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
                                 {% endfor %}
@@ -230,7 +302,23 @@
                                 {% for team_new in all_team_news %}
                                     <a href="{% url 'news:team_news_detail' team_new.id %}">
                                     <li>
-                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}"><span>[{{ team_new.source.name|truncatewords:"3" }}]</span>{{ team_new.title|truncatewords:"20" }}<span class="a">[{{ team_new.add_time|date:'Y-m-d' }}]</span>
+                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}">
+                                        <span>
+                                            [
+                                            {% if team_new.source.name|length >= 3 %}
+                                                {{ team_new.source.name|slice:"3" }}...
+                                                {% else %}
+                                                {{ team_new.source.name}}
+                                            {% endif %}
+                                            ]
+                                        </span>
+                                            {% if team_new.title|length >= 17 %}
+                                                {{ team_new.title|slice:"17" }}...
+                                                {% else %}
+                                                {{ team_new.title }}
+                                            {% endif %}
+
+                                        <span class="a">[{{ team_new.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
                                 {% endfor %}
@@ -243,7 +331,23 @@
                                 {% for places_new in all_places_news %}
                                     <a href="{% url 'news:places_news_detail' places_new.id %}">
                                     <li>
-                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}"><span>[{{ places_new.source.name|truncatewords:"3" }}]</span>{{ places_new.title|truncatewords:"20" }}<span class="a">[{{ places_new.add_time|date:'Y-m-d' }}]</span>
+                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}">
+                                        <span>
+                                            [
+                                            {% if places_new.source.name|length >= 3 %}
+                                                {{ places_new.source.name|slice:"3" }}...
+                                                {% else %}
+                                                {{ places_new.source.name}}
+                                            {% endif %}
+                                            ]
+                                        </span>
+                                            {% if places_new.title|length >= 17 %}
+                                                {{ places_new.title|slice:"17" }}...
+                                                {% else %}
+                                                {{ places_new.title }}
+                                            {% endif %}
+
+                                        <span class="a">[{{ places_new.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
                                 {% endfor %}
@@ -256,7 +360,23 @@
                                 {% for help_new in all_help_news %}
                                     <a href="{% url 'news:help_news_detail' help_new.id %}">
                                     <li>
-                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}"><span>[{{ help_new.source.name|truncatewords:"3" }}]</span>{{ help_new.title|truncatewords:"20" }}<span class="a">[{{ help_new.add_time|date:'Y-m-d' }}]</span>
+                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}">
+                                        <span>
+                                            [
+                                            {% if help_new.source.name|length >= 3 %}
+                                                {{ help_new.source.name|slice:"3" }}...
+                                                {% else %}
+                                                {{ help_new.source.name}}
+                                            {% endif %}
+                                            ]
+                                        </span>
+                                            {% if help_new.title|length >= 17 %}
+                                                {{ help_new.title|slice:"17" }}...
+                                                {% else %}
+                                                {{ help_new.title }}
+                                            {% endif %}
+
+                                        <span class="a">[{{ help_new.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
                                 {% endfor %}
@@ -269,7 +389,22 @@
                                 {% for video_natrol in all_video_natrols %}
                                     <a href="{% url 'news:video_patrol_detail' video_natrol.id %}">
                                     <li>
-                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}"><span>[{{ video_natrol.source.name|truncatewords:"3" }}]</span>{{ video_natrol.title|truncatewords:"20" }}<span class="a">[{{ video_natrol.add_time|date:'Y-m-d' }}]</span>
+                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}">
+                                        <span>
+                                            [
+                                            {% if video_natrol.source.name|length >= 3 %}
+                                                {{ video_natrol.source.name|slice:"3" }}...
+                                                {% else %}
+                                                {{ video_natrol.source.name}}
+                                            {% endif %}
+                                            ]
+                                        </span>
+                                            {% if video_natrol.title|length >= 17 %}
+                                                {{ video_natrol.title|slice:"17" }}...
+                                                {% else %}
+                                                {{ video_natrol.title }}
+                                            {% endif %}
+                                        <span class="a">[{{ video_natrol.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
                                 {% endfor %}
@@ -282,7 +417,22 @@
                                 {% for law in all_laws %}
                                     <a href="{% url 'work:laws_detail' law.id %}">
                                     <li>
-                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}"><span>[{{ law.source.name|truncatewords:"3" }}]</span>{{ law.title|truncatewords:"20" }}<span class="a">[{{ law.add_time|date:'Y-m-d' }}]</span>
+                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}">
+                                        <span>
+                                            [
+                                            {% if law.source.name|length >= 3 %}
+                                                {{ law.source.name|slice:"3" }}...
+                                                {% else %}
+                                                {{ law.source.name}}
+                                            {% endif %}
+                                            ]
+                                        </span>
+                                            {% if law.title|length >= 17 %}
+                                                {{ law.title|slice:"17" }}...
+                                                {% else %}
+                                                {{ law.title }}
+                                            {% endif %}
+                                        <span class="a">[{{ law.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
                                 {% endfor %}
@@ -295,7 +445,23 @@
                                 {% for build_work in all_build_works %}
                                     <a href="{% url 'news:build_work_detail' build_work.id %}">
                                     <li>
-                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}"><span>[{{ build_work.source.name|truncatewords:"3" }}]</span>{{ build_work.title|truncatewords:"20" }}<span class="a">[{{ build_work.add_time|date:'Y-m-d' }}]</span>
+                                        <img class="pictureimg" src="{% static 'img/detail_img.png' %}">
+                                        <span>
+                                            [
+                                            {% if build_work.source.name|length >= 3 %}
+                                                {{ build_work.source.name|slice:"3" }}...
+                                                {% else %}
+                                                {{ build_work.source.name}}
+                                            {% endif %}
+                                            ]
+                                        </span>
+                                            {% if build_work.title|length >= 17 %}
+                                                {{ build_work.title|slice:"17" }}...
+                                                {% else %}
+                                                {{ build_work.title }}
+                                            {% endif %}
+
+                                        <span class="a">[{{ build_work.add_time|date:'Y-m-d' }}]</span>
                                     </li>
                                     </a>
                                 {% endfor %}
@@ -330,7 +496,13 @@
                                 {% for resource in all_resources %}
                                     <a href="{{ MEDIA_URL }}{{ resource.download }}">
                                         <span class="spot"></span>
-                                        <li>{{ resource.title }}</li>
+                                        <li>
+                                            {% if resource.title|length >= 10 %}
+                                                {{ resource.title|slice:"10" }}...
+                                                {% else %}
+                                                {{ resource.title }}
+                                            {% endif %}
+                                        </li>
                                     </a>
                                 {% endfor %}
                             </ul>
@@ -361,7 +533,14 @@
                             <div class="block_a">信息发布排行榜</div>
                             <ul>
                                 {% for source,value in source_nums.items %}
-                                    <li>{{ source.name }}：{{ value }}</li>
+                                    <li>
+                                        {% if source.name|length >= 6 %}
+                                                {{ source.name|slice:"6" }}...
+                                                {% else %}
+                                                {{ source.name }}
+                                        {% endif %}
+                                        ：{{ value }}
+                                    </li>
                                 {% endfor %}
 
                             </ul>
@@ -373,7 +552,13 @@
                                     {% for url in other_urls %}
                                         <a href="{{ url.url }}" target="_blank">
                                             <span class="spot"></span>
-                                            <li>{{ url.title }}</li>
+                                            <li>
+                                                {% if url.title|length >= 6 %}
+                                                    {{ url.title|slice:"6" }}...
+                                                    {% else %}
+                                                    {{ url.title }}
+                                                {% endif %}
+                                            </li>
                                         </a>
                                     {% endfor %}
                                 </ul>
